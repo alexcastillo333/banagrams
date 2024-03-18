@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F27322BA806B500A413F4 /* InstructionsViewController.swift */; };
 		B8824EAF2BA6DDDF00F534D2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */; };
 		B8824EB62BA6E35C00F534D2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B8824EB52BA6E35C00F534D2 /* FirebaseAnalytics */; };
 		B8824EB82BA6E35C00F534D2 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = B8824EB72BA6E35C00F534D2 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		848F27322BA806B500A413F4 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bananagrams.entitlements; sourceTree = "<group>"; };
 		B8824EC02BA6E55D00F534D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				B8E1AA732B9A63380046E257 /* bananagrams.xcdatamodeld */,
 				B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */,
 				B8824EC02BA6E55D00F534D2 /* GoogleService-Info.plist */,
+				848F27322BA806B500A413F4 /* InstructionsViewController.swift */,
 				B8824EC22BA6F14300F534D2 /* SignUpViewController.swift */,
 				B8E575212BA70473006C87FF /* Info.plist */,
 			);
@@ -189,6 +192,7 @@
 				B8E1AA6B2B9A63370046E257 /* AppDelegate.swift in Sources */,
 				B8E1AA6D2B9A63370046E257 /* SceneDelegate.swift in Sources */,
 				B8824EAF2BA6DDDF00F534D2 /* LoginViewController.swift in Sources */,
+				848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */,
 				B8E1AA752B9A63380046E257 /* bananagrams.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
