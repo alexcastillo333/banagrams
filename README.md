@@ -1,8 +1,9 @@
 # banagrams
 Contributions:
 - Aaron
-    Workd on the login and signup screens. Implemented the database for storing username and password combinations
 - Abdullah
+    Worked on the login and signup screens. Implemented the database for storing username and password combinations
+
 - Taqi
 - Alex
     Worked on the instructions screen. When a user selects a segment in the segmentedVC, the corresponding set of instructions is displayed. 
