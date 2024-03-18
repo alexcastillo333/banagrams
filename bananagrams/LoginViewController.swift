@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
                 } else {
                     // Login was successful, segue to the next screen or dismiss
                     print("User logged in successfully")
-                    // self?.performSegue(withIdentifier: "loggedInSegueIdentifier", sender: self)
+                    self?.performSegue(withIdentifier: "loggedInSegueIdentifier", sender: self)
                 }
             }
         }

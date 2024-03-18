@@ -90,11 +90,12 @@
                     <connections>
                         <outlet property="emailTextField" destination="dqn-27-ouO" id="eDA-Gi-sKf"/>
                         <outlet property="passwordTextField" destination="Nt4-Ha-531" id="YRE-7R-5iK"/>
+                        <segue destination="zyc-48-JGg" kind="presentation" identifier="loggedInSegueIdentifier" modalPresentationStyle="fullScreen" id="jtd-3Q-WCz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-709" y="-12"/>
+            <point key="canvasLocation" x="-711" y="-13"/>
         </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="Lk0-DY-xQd">
@@ -243,12 +244,73 @@
             </objects>
             <point key="canvasLocation" x="252.67175572519082" y="763.38028169014092"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="zOe-QC-cMw">
+            <objects>
+                <viewController id="zyc-48-JGg" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NkW-qs-O4x">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="stock image profile pic" translatesAutoresizingMaskIntoConstraints="NO" id="I0t-Ab-piZ">
+                                <rect key="frame" x="37" y="68" width="50" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="BananaGrams_logo" translatesAutoresizingMaskIntoConstraints="NO" id="clZ-S5-nup">
+                                <rect key="frame" x="55" y="185" width="286" height="110"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kcg-Lq-v2g">
+                                <rect key="frame" x="138" y="409" width="118" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="New Game">
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El3-qO-Qih">
+                                <rect key="frame" x="138" y="471" width="121" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Leaderboard">
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ut3-f2-dZK">
+                                <rect key="frame" x="138" y="531" width="121" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Instructions">
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="JLM-9h-ssp" kind="show" id="2hL-5x-5MC"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="gearshape" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="shi-IO-e8k">
+                                <rect key="frame" x="295" y="78.333333333333314" width="46" height="49"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="OPI-E3-Ugn"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="wGI-Yg-cX4"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aL1-xo-3e8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1078.6259541984732" y="-13.380281690140846"/>
+        </scene>
         <!--Instructions View Controller-->
         <scene sceneID="pMS-3Z-f4o">
             <objects>
                 <viewController id="JLM-9h-ssp" customClass="InstructionsViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ru-BL-aJ4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Banagrams" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2h2-gd-w6C">
@@ -288,6 +350,7 @@
                         <viewLayoutGuide key="safeArea" id="3Cj-xM-SV9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="WOo-y7-POM"/>
                     <connections>
                         <outlet property="instructionsLabel" destination="j41-Kp-bDn" id="hb4-IB-N4a"/>
                         <outlet property="segCtrl" destination="BuW-Ng-8l4" id="DjT-Td-eoN"/>
@@ -295,13 +358,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1g-6c-2d6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1184" y="-13"/>
+            <point key="canvasLocation" x="1906" y="-13"/>
         </scene>
     </scenes>
     <resources>
+        <image name="BananaGrams_logo" width="286" height="110"/>
+        <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="stock image profile pic" width="350" height="350"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
