@@ -31,9 +31,10 @@ class SignUpViewController: UIViewController {
                         } else {
                             // User was created successfully, now you can do further setup for the user
                             // TODO: Segue to the next view controller once it's created
-                            // self.performSegue(withIdentifier: "yourSegueIdentifier", sender: self)
-                            print("User signed up successfully")
-                            // self.dismiss(animated: true, completion: nil)
+                            let alert = UIAlertController(title: "Sign Up Successful", message: "Account has been created successfully!", preferredStyle: .alert)
+                            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                            self.present(alert, animated: true)
+                            self.dismiss(animated: true, completion: nil)
                         }
                     }
                 }
