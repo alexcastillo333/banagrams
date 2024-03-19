@@ -1,17 +1,17 @@
-# banagrams
+# bananagrams
 Contributions:
-- Aaron
-- Abdullah
-    Worked on the login and signup screens. Implemented the database for storing username and password combinations
 
-- Taqi
-- Alex
-    Worked on the instructions screen. When a user selects a segment in the segmentedVC, the corresponding set of instructions is displayed. 
+    Taqi Hossain (25%)
+      - Home Page
+    Abdallah Al-Sukhni (25%)
+      - Registration/Signup
+      - Login Page
+      - Logout Page
+    Alex Castillo (25%)
+      - Instruction Description Page
+    Aaron Posadas (25%)
+      - Profile Page
+      - Custom Bananagrams Logo
 
-
-
-
-Differences:
-
-
-- Instructions screen now has a 3rd segment in the segmented view controller because we will add the Versus game mode.
+Deviations: 
+ - Issues with Firebase Package dependencies made it extremely difficult to compile the project and test the alpha.
