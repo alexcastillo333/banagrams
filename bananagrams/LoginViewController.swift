@@ -15,6 +15,14 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
+        
+        // add brown rounded borders to text fields
+        passwordTextField.layer.borderWidth = 2
+        passwordTextField.layer.borderColor = CGColor(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+        passwordTextField.layer.cornerRadius = 7
+        emailTextField.layer.borderWidth = 2
+        emailTextField.layer.borderColor = CGColor(red: 0.6, green: 0.4, blue: 0.2, alpha: 1.0)
+        emailTextField.layer.cornerRadius = 7
 
         // Do any additional setup after loading the view.
     }
