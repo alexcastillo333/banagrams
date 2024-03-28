@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */; };
 		848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F27322BA806B500A413F4 /* InstructionsViewController.swift */; };
+		84E2BDF02BB563E0006D3A2B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */; };
+		84E2BDF22BB56426006D3A2B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDF12BB56426006D3A2B /* Tile.swift */; };
 		B8824EAF2BA6DDDF00F534D2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */; };
 		B8824EB62BA6E35C00F534D2 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = B8824EB52BA6E35C00F534D2 /* FirebaseAnalytics */; };
 		B8824EB82BA6E35C00F534D2 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = B8824EB72BA6E35C00F534D2 /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -83,6 +85,8 @@
 /* Begin PBXFileReference section */
 		2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		848F27322BA806B500A413F4 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
+		84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		84E2BDF12BB56426006D3A2B /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bananagrams.entitlements; sourceTree = "<group>"; };
 		B8824EC02BA6E55D00F534D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 				B8E1AA6C2B9A63370046E257 /* SceneDelegate.swift */,
 				B8E1AA6E2B9A63370046E257 /* ViewController.swift */,
 				B8E1AA702B9A63380046E257 /* Main.storyboard */,
+				84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */,
+				84E2BDF12BB56426006D3A2B /* Tile.swift */,
 				2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */,
 				B8E1AA762B9A63400046E257 /* Assets.xcassets */,
 				B8E1AA782B9A63400046E257 /* LaunchScreen.storyboard */,
@@ -353,8 +359,10 @@
 				B8E1AA6F2B9A63370046E257 /* ViewController.swift in Sources */,
 				B8E1AA6B2B9A63370046E257 /* AppDelegate.swift in Sources */,
 				B8E1AA6D2B9A63370046E257 /* SceneDelegate.swift in Sources */,
+				84E2BDF02BB563E0006D3A2B /* GameViewController.swift in Sources */,
 				B8824EAF2BA6DDDF00F534D2 /* LoginViewController.swift in Sources */,
 				848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */,
+				84E2BDF22BB56426006D3A2B /* Tile.swift in Sources */,
 				2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */,
 				B8E1AA752B9A63380046E257 /* bananagrams.xcdatamodeld in Sources */,
 			);
