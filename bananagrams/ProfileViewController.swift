@@ -8,10 +8,11 @@
 import UIKit
 import FirebaseAuth
 class ProfileViewController: UIViewController {
-
+    var username: String?
+    @IBOutlet weak var playerNameLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        playerNameLabel.text = username
         // Do any additional setup after loading the view.
     }
     

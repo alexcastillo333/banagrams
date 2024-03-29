@@ -210,7 +210,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="#Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvM-Gr-s7V">
-                                <rect key="frame" x="143" y="323" width="107" height="21"/>
+                                <rect key="frame" x="106" y="323" width="181" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -265,17 +265,18 @@
                     </view>
                     <navigationItem key="navigationItem" id="uE7-em-8Eo"/>
                     <connections>
+                        <outlet property="playerNameLabel" destination="IvM-Gr-s7V" id="AER-cO-7yJ"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegueIdentifier" modalPresentationStyle="fullScreen" id="COG-wT-k3U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="39t-fz-6pc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="723"/>
+            <point key="canvasLocation" x="307.63358778625951" y="722.53521126760563"/>
         </scene>
-        <!--View Controller-->
+        <!--Home Screen View Controller-->
         <scene sceneID="zOe-QC-cMw">
             <objects>
-                <viewController id="zyc-48-JGg" sceneMemberID="viewController">
+                <viewController id="zyc-48-JGg" customClass="HomeScreenViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NkW-qs-O4x">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -332,7 +333,7 @@
                                     <color key="baseForegroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="oKe-sz-i52" kind="presentation" modalPresentationStyle="fullScreen" id="o5t-ve-gpB"/>
+                                    <segue destination="oKe-sz-i52" kind="presentation" identifier="profileSegueIdentifier" modalPresentationStyle="fullScreen" id="o5t-ve-gpB"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="El3-qO-Qih">
@@ -532,7 +533,7 @@ keep peeling until there are no letters left!</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

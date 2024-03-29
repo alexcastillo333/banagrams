@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.isSecureTextEntry = true
@@ -38,6 +39,7 @@ class LoginViewController: UIViewController {
                 } else {
                     // Login was successful, segue to the next screen or dismiss
                     print("User logged in successfully")
+                    
                     self?.performSegue(withIdentifier: "loggedInSegueIdentifier", sender: self)
                 }
             }
@@ -46,10 +48,12 @@ class LoginViewController: UIViewController {
     
     
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "signUpSegueIdentifier" {
-//                
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "loggedInSegueIdentifier" {
+            if let nextVC = segue.destination as? HomeScreenViewController {
+                nextVC.email = emailTextField.text!
+            }
+        }
+    }
     
 }

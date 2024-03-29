@@ -8,12 +8,14 @@
 import UIKit
 import FirebaseAuth
 import CoreData
-
+let appDelegateSignUp = UIApplication.shared.delegate as! AppDelegate
+let contextSignUp = appDelegateSignUp.persistentContainer.viewContext
 class SignUpViewController: UIViewController {
 
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // add brown rounded borders to text fields
@@ -48,9 +50,22 @@ class SignUpViewController: UIViewController {
                             let alert = UIAlertController(title: "Sign Up Successful", message: "Account has been created successfully!", preferredStyle: .alert)
                             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                             self.present(alert, animated: true)
+                            self.saveToCoreData(email: self.emailTextField.text!, username: self.usernameTextField.text!)
                             self.dismiss(animated: true, completion: nil)
                         }
                     }
                 }
+    }
+    func saveToCoreData(email: String, username: String) {
+        let userStored = NSEntityDescription.insertNewObject(forEntityName: "User", into: contextSignUp)
+        userStored.setValue(username, forKey: "username")
+        userStored.setValue(email, forKey:"email")
+        // Set other attributes as needed
+        do {
+            try contextSignUp.save()
+            print("User data saved to Core Data")
+        } catch {
+            print("Error saving user data: \(error)")
+        }
     }
 }
