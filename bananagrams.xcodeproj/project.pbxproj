@@ -11,6 +11,11 @@
 		848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F27322BA806B500A413F4 /* InstructionsViewController.swift */; };
 		84E2BDF02BB563E0006D3A2B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */; };
 		84E2BDF22BB56426006D3A2B /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDF12BB56426006D3A2B /* Tile.swift */; };
+		B8579EB32BBDDFDC00DFCDCC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */; };
+		B8579EB52BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8579EB42BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 */; };
+		B8579EB72BBDEF1200DFCDCC /* croppedLofi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */; };
+		B8579EB92BBDF2B900DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8579EB82BBDF2B800DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 */; };
+		B8579EBB2BBDF2EE00DFCDCC /* SoundFXButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */; };
 		B87C18652BB69F84000AF925 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B8824EC02BA6E55D00F534D2 /* GoogleService-Info.plist */; };
 		B87C18672BB6A333000AF925 /* HomeScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */; };
 		B8824EAF2BA6DDDF00F534D2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */; };
@@ -88,6 +93,11 @@
 		848F27322BA806B500A413F4 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		84E2BDF12BB56426006D3A2B /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		B8579EB42BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SOUNDEFFECT2MAN.mp3; sourceTree = "<group>"; };
+		B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = croppedLofi.mp3; sourceTree = "<group>"; };
+		B8579EB82BBDF2B800DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey sound effect-[AudioTrimmer.com].mp3"; sourceTree = "<group>"; };
+		B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundFXButton.swift; sourceTree = "<group>"; };
 		B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewController.swift; sourceTree = "<group>"; };
 		B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bananagrams.entitlements; sourceTree = "<group>"; };
@@ -204,11 +214,14 @@
 				B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */,
 				B8E1AA6A2B9A63370046E257 /* AppDelegate.swift */,
 				B8E1AA6C2B9A63370046E257 /* SceneDelegate.swift */,
+				B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */,
 				B8E1AA6E2B9A63370046E257 /* ViewController.swift */,
 				B8E1AA702B9A63380046E257 /* Main.storyboard */,
 				84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */,
+				B8579EB82BBDF2B800DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 */,
 				84E2BDF12BB56426006D3A2B /* Tile.swift */,
 				2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */,
+				B8579EB42BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 */,
 				B8E1AA762B9A63400046E257 /* Assets.xcassets */,
 				B8E1AA782B9A63400046E257 /* LaunchScreen.storyboard */,
 				B8E1AA732B9A63380046E257 /* bananagrams.xcdatamodeld */,
@@ -218,6 +231,8 @@
 				B8824EC22BA6F14300F534D2 /* SignUpViewController.swift */,
 				B8E575212BA70473006C87FF /* Info.plist */,
 				B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */,
+				B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */,
+				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
 			);
 			path = bananagrams;
 			sourceTree = "<group>";
@@ -344,8 +359,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B8579EB92BBDF2B900DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 in Resources */,
+				B8579EB72BBDEF1200DFCDCC /* croppedLofi.mp3 in Resources */,
 				B8E1AA7A2B9A63400046E257 /* LaunchScreen.storyboard in Resources */,
 				B87C18652BB69F84000AF925 /* GoogleService-Info.plist in Resources */,
+				B8579EB52BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 in Resources */,
 				B8E1AA772B9A63400046E257 /* Assets.xcassets in Resources */,
 				B8E1AA722B9A63380046E257 /* Main.storyboard in Resources */,
 			);
@@ -359,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8824EC32BA6F14300F534D2 /* SignUpViewController.swift in Sources */,
+				B8579EBB2BBDF2EE00DFCDCC /* SoundFXButton.swift in Sources */,
 				B8E1AA6F2B9A63370046E257 /* ViewController.swift in Sources */,
 				B8E1AA6B2B9A63370046E257 /* AppDelegate.swift in Sources */,
 				B8E1AA6D2B9A63370046E257 /* SceneDelegate.swift in Sources */,
@@ -369,6 +388,7 @@
 				84E2BDF22BB56426006D3A2B /* Tile.swift in Sources */,
 				2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */,
 				B8E1AA752B9A63380046E257 /* bananagrams.xcdatamodeld in Sources */,
+				B8579EB32BBDDFDC00DFCDCC /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

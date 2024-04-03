@@ -162,7 +162,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="oWq-cm-3eB"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" modalPresentationStyle="fullScreen" id="oWq-cm-3eB"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="BananaGrams_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Yqc-Cv-c0M">
@@ -356,10 +356,10 @@
             </objects>
             <point key="canvasLocation" x="1078.6259541984732" y="-13.380281690140846"/>
         </scene>
-        <!--View Controller-->
+        <!--Settings View Controller-->
         <scene sceneID="y05-Rq-O2t">
             <objects>
-                <viewController id="VWf-Nu-HBr" sceneMemberID="viewController">
+                <viewController id="VWf-Nu-HBr" customClass="SettingsViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IFs-eI-6cX">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,16 +379,25 @@
                                 <rect key="frame" x="72" y="411" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" systemColor="systemBrownColor"/>
+                                <connections>
+                                    <action selector="darkModeSwitchFlipped:" destination="VWf-Nu-HBr" eventType="valueChanged" id="fPj-lu-LrP"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNp-Gp-7sB">
                                 <rect key="frame" x="72" y="487" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" systemColor="systemBrownColor"/>
+                                <connections>
+                                    <action selector="soundEffectsSwitchFlipped:" destination="VWf-Nu-HBr" eventType="valueChanged" id="7yJ-08-hTd"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G9D-2l-RK6">
                                 <rect key="frame" x="72" y="563" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="onTintColor" systemColor="systemBrownColor"/>
+                                <connections>
+                                    <action selector="musicSwitchFlipped:" destination="VWf-Nu-HBr" eventType="valueChanged" id="9lX-EU-5lY"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF5-mW-z2C">
                                 <rect key="frame" x="175" y="416" width="112" height="21"/>
@@ -411,11 +420,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9c0-g1-qc2" customClass="SoundButton" customModule="bananagrams" customModuleProvider="target">
+                                <rect key="frame" x="139" y="685" width="75" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="randomButtonPressed:" destination="VWf-Nu-HBr" eventType="touchUpInside" id="ITK-lk-vfE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9b9-wB-INL"/>
                         <color key="backgroundColor" red="0.99755531549453735" green="0.99730165721671438" blue="0.70008185082738328" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
                     <navigationItem key="navigationItem" id="q4h-cA-vUy"/>
+                    <connections>
+                        <outlet property="musicSwitch" destination="G9D-2l-RK6" id="vwy-gq-Bz9"/>
+                        <outlet property="randomButton" destination="9c0-g1-qc2" id="tzZ-xJ-HHe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cde-uf-fFd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -520,8 +542,8 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hJr-mZ-wPS"/>
-        <segue reference="COG-wT-k3U"/>
+        <segue reference="jtd-3Q-WCz"/>
+        <segue reference="oWq-cm-3eB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="BananaGrams_logo" width="286" height="110"/>
