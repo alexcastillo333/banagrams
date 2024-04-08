@@ -68,11 +68,11 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         //testing stuff
         for i in 0...cols-1 {
-            grid[3][i] = Tile(letter: "f")
+            grid[3][i] = Tile(letter: "F")
         }
         
         for i in 0...cols-1 {
-            grid[4][i] = Tile(letter: "o")
+            grid[4][i] = Tile(letter: "O")
         }
 
         // TODO: set the hand delegate and datasource
