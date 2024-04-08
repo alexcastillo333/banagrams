@@ -14,11 +14,9 @@ class Tile {
     var letter:Character
     
     // An image for the tile (currently using systemName UIImages)
-    var image:UIImage
     
     // initializer
-    init(letter: Character, image: UIImage) {
+    init(letter: Character) {
         self.letter = letter
-        self.image = image
     }
 }
