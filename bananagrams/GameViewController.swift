@@ -40,6 +40,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // cell identifier for the gameBoard collectionView cells
     let gridCellid = "gridCell"
+    // cell identifier for the hand collectionView cells
+    let handCellid = "handCell"
 
     
     override func viewDidLoad() {

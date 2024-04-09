@@ -7,6 +7,8 @@
 
 import UIKit
 
+//  class for a collectionView cell in the collctionView for a grid
+// TODO: (maybe) - change to UIImage instead of a label
 class GridCell: UICollectionViewCell {
     
     
