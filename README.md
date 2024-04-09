@@ -9,6 +9,9 @@ Contributions:
       - Registration/Signup
       - Login Page
       - Logout Page
+      - Refactored segues
+      - Saved Username per user
+      - Sound effect and music
     Alex Castillo (25%)
       - Instruction Description Page
     Aaron Posadas (25%)
