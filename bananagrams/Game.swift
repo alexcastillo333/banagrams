@@ -74,6 +74,7 @@ class Game {
         }
         // grid is initially empty
         grid = Array(repeating: Array(repeating: nil, count: numRows), count: numRows)
+        print(hand)
     }
     
     // return true if the user successfully peeled, remove a tile from the deck and place it into their hand. return false if the grid is not in a peelable state
@@ -119,10 +120,10 @@ class Game {
         return getHStringIdx(row: row - 1, col: col)
     }
     
-    // get the horizontal string at and index
+    // get the horizontal string at index [row][col]
     func getHStringAtIdx(row:Int, col: inout Int) -> String {
         var s = ""
-        while grid[row][col] != nil {
+        while col < numRows && grid[row][col] != nil {
             s += String(grid[row][col]!.letter)
             col += 1
         }
@@ -130,9 +131,10 @@ class Game {
         return s
     }
     
+    // get the vertical string starting at index [row][co]
     func getVStringAtIdx(row: inout Int, col:Int) -> String {
         var s = ""
-        while grid[row][col] != nil {
+        while row < numRows && grid[row][col] != nil {
             s += String(grid[row][col]!.letter)
             row += 1
         }
@@ -140,7 +142,7 @@ class Game {
         return s
     }
     
-    
+    // check if a word is in the playable words set
     func checkWord(word:String) -> Bool {
         return Game.playableWords.contains(word.lowercased())
     }

@@ -543,10 +543,11 @@ keep peeling until there are no letters left!</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="h2c-Ea-Q37">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="h2c-Ea-Q37">
                                 <rect key="frame" x="16" y="652" width="361" height="166"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" red="1" green="0.88483391609999995" blue="0.74049388110000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" white="0.9185697115" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Or4-hz-LSj">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -554,7 +555,7 @@ keep peeling until there are no letters left!</string>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="handCell" id="vYe-TZ-yLd" customClass="HandCollectionViewCell" customModule="bananagrams" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="handCell" id="vYe-TZ-yLd" customClass="HandCell" customModule="bananagrams" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="19" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="eKH-Gx-nzG">
@@ -581,6 +582,10 @@ keep peeling until there are no letters left!</string>
                                                 <constraint firstItem="2or-0Q-lbf" firstAttribute="centerX" secondItem="eKH-Gx-nzG" secondAttribute="centerX" id="xUh-NA-wvM"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="count" destination="Phj-yV-4bc" id="Dld-f4-ooc"/>
+                                            <outlet property="letter" destination="2or-0Q-lbf" id="gBd-om-tge"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -590,6 +595,7 @@ keep peeling until there are no letters left!</string>
                     </view>
                     <connections>
                         <outlet property="gameBoard" destination="FHR-Hm-fBd" id="oKB-0j-lyB"/>
+                        <outlet property="gameHand" destination="h2c-Ea-Q37" id="bvN-xS-Knk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yz-C1-VCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -598,6 +604,7 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="o5t-ve-gpB"/>
         <segue reference="hJr-mZ-wPS"/>
         <segue reference="COG-wT-k3U"/>
     </inferredMetricsTieBreakers>
@@ -611,7 +618,7 @@ keep peeling until there are no letters left!</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
