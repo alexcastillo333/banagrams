@@ -26,4 +26,5 @@ Contributions:
 Deviations: 
  - Issues with Firebase Package dependencies made it extremely difficult to compile the project and test the alpha.\
  - Aaron was very sick for the majority of this phase.
- - the grid size was reduced to 30 by 30, we played a real game and counted the width and height, neither exceeded 30.
+ - the grid size was reduced to 30 by 30, we played a real game and counted the width and height, neither exceeded 30.\
+ - We did not include custom game features
