@@ -3,6 +3,8 @@ Contributions:
 
     Taqi Hossain (25%)
       - Home Page
+      - Settings Page
+      - Refactored login page and UI changes
     Abdallah Al-Sukhni (25%)
       - Registration/Signup
       - Login Page
