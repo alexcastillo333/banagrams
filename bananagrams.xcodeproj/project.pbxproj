@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A9EE0302BC5B7B700C023B6 /* dictionary.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A9EE02E2BC59FC400C023B6 /* dictionary.json */; };
 		2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */; };
+		84535D002BC5D9BF00D9D0C6 /* scrabble_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */; };
+		84535D022BC5DA1800D9D0C6 /* ValidWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84535D012BC5DA1800D9D0C6 /* ValidWords.swift */; };
 		84599CD92BC336B8009EF4FF /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84599CD82BC336B8009EF4FF /* Game.swift */; };
 		847AA7152BC4DD74000AF56D /* HandCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AA7142BC4DD74000AF56D /* HandCollectionViewCell.swift */; };
 		848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F27322BA806B500A413F4 /* InstructionsViewController.swift */; };
@@ -93,8 +94,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1A9EE02E2BC59FC400C023B6 /* dictionary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dictionary.json; sourceTree = "<group>"; };
 		2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrabble_words.txt; sourceTree = "<group>"; };
+		84535D012BC5DA1800D9D0C6 /* ValidWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidWords.swift; sourceTree = "<group>"; };
 		84599CD82BC336B8009EF4FF /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		847AA7142BC4DD74000AF56D /* HandCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCollectionViewCell.swift; sourceTree = "<group>"; };
 		848F27322BA806B500A413F4 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,8 @@
 			isa = PBXGroup;
 			children = (
 				B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */,
+				84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */,
+				84535D012BC5DA1800D9D0C6 /* ValidWords.swift */,
 				B8E1AA6A2B9A63370046E257 /* AppDelegate.swift */,
 				B8E1AA6C2B9A63370046E257 /* SceneDelegate.swift */,
 				B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */,
@@ -244,7 +248,6 @@
 				B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */,
 				B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */,
 				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
-				1A9EE02E2BC59FC400C023B6 /* dictionary.json */,
 			);
 			path = bananagrams;
 			sourceTree = "<group>";
@@ -375,8 +378,8 @@
 				B8579EB72BBDEF1200DFCDCC /* croppedLofi.mp3 in Resources */,
 				B8E1AA7A2B9A63400046E257 /* LaunchScreen.storyboard in Resources */,
 				B87C18652BB69F84000AF925 /* GoogleService-Info.plist in Resources */,
+				84535D002BC5D9BF00D9D0C6 /* scrabble_words.txt in Resources */,
 				B8579EB52BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 in Resources */,
-				1A9EE0302BC5B7B700C023B6 /* dictionary.json in Resources */,
 				B8E1AA772B9A63400046E257 /* Assets.xcassets in Resources */,
 				B8E1AA722B9A63380046E257 /* Main.storyboard in Resources */,
 			);
@@ -397,6 +400,7 @@
 				84E2BDF02BB563E0006D3A2B /* GameViewController.swift in Sources */,
 				B87C18672BB6A333000AF925 /* HomeScreenViewController.swift in Sources */,
 				B8824EAF2BA6DDDF00F534D2 /* LoginViewController.swift in Sources */,
+				84535D022BC5DA1800D9D0C6 /* ValidWords.swift in Sources */,
 				848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */,
 				847AA7152BC4DD74000AF56D /* HandCollectionViewCell.swift in Sources */,
 				84599CD92BC336B8009EF4FF /* Game.swift in Sources */,

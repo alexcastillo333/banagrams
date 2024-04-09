@@ -10,8 +10,8 @@ import Foundation
 
 // The class for information about a game, contains a grid, and the hand
 class Game {
-    
-    
+    // a set of all playable words
+    static let playableWords = MakeValidWords().words!
     // you can only peel when this is true
     // update this var evertime you move a tile
     var canPeel = false
@@ -74,7 +74,6 @@ class Game {
         }
         // grid is initially empty
         grid = Array(repeating: Array(repeating: nil, count: numRows), count: numRows)
-        
     }
     
     // return true if the user successfully peeled, remove a tile from the deck and place it into their hand. return false if the grid is not in a peelable state
@@ -142,24 +141,8 @@ class Game {
     }
     
     
-    // TODO: import a dictionary as a set, check if word is in that set
     func checkWord(word:String) -> Bool {
-        var dictionary = Set<String>()
-        if let path = Bundle.main.path(forResource: "dictionary", ofType: "json") {
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
-                if let words = json?.keys {
-                    dictionary = Set(words)
-                }
-            } catch {
-                print("Error loading dictionary: \(error)")
-            }
-        } else {
-            print("Dictionary file not found.")
-        }
-        
-        return dictionary.contains(word.lowercased())
+        return Game.playableWords.contains(word.lowercased())
     }
     
 }
