@@ -9,7 +9,6 @@ Contributions:
       - Registration/Signup
       - Login Page
       - Logout Page
-      - Refactored segues
       - Saved Username per user
       - Sound effect and music
     Alex Castillo (25%)
@@ -17,6 +16,10 @@ Contributions:
     Aaron Posadas (25%)
       - Profile Page
       - Custom Bananagrams Logo
+      - Refactored segues
+      - Edited audios
+      - Gameplay
 
 Deviations: 
- - Issues with Firebase Package dependencies made it extremely difficult to compile the project and test the alpha.
+ - Issues with Firebase Package dependencies made it extremely difficult to compile the project and test the alpha.\
+ - Aaron was very sick for the majority of this phase.
