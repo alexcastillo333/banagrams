@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A9EE02F2BC59FC400C023B6 /* dictionary.json in Resources */ = {isa = PBXBuildFile; fileRef = 1A9EE02E2BC59FC400C023B6 /* dictionary.json */; };
 		2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */; };
 		84599CD92BC336B8009EF4FF /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84599CD82BC336B8009EF4FF /* Game.swift */; };
 		847AA7152BC4DD74000AF56D /* HandCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847AA7142BC4DD74000AF56D /* HandCollectionViewCell.swift */; };
@@ -92,6 +93,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A9EE02E2BC59FC400C023B6 /* dictionary.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dictionary.json; sourceTree = "<group>"; };
 		2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		84599CD82BC336B8009EF4FF /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		847AA7142BC4DD74000AF56D /* HandCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */,
 				B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */,
 				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
+				1A9EE02E2BC59FC400C023B6 /* dictionary.json */,
 			);
 			path = bananagrams;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 				B8E1AA7A2B9A63400046E257 /* LaunchScreen.storyboard in Resources */,
 				B87C18652BB69F84000AF925 /* GoogleService-Info.plist in Resources */,
 				B8579EB52BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 in Resources */,
+				1A9EE02F2BC59FC400C023B6 /* dictionary.json in Resources */,
 				B8E1AA772B9A63400046E257 /* Assets.xcassets in Resources */,
 				B8E1AA722B9A63380046E257 /* Main.storyboard in Resources */,
 			);

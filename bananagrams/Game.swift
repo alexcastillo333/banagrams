@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 // The class for information about a game, contains a grid, and the hand
 class Game {
     
@@ -142,9 +143,23 @@ class Game {
     
     
     // TODO: import a dictionary as a set, check if that word is in that set
-    func checkWord(word:String) -> Bool{
-        return true
+    func checkWord(word:String) -> Bool {
+        var dictionary = Set<String>()
+        if let path = Bundle.main.path(forResource: "dictionary", ofType: "json") {
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                let json = try JSONSerialization.jsonObject(with: data, options: [])
+                if let words = json as? [String] {
+                    dictionary = Set(words)
+                }
+            } catch {
+                print("Error loading dictionary: \(error)")
+            }
+        } else {
+            print("Dictionary file not found.")
+        }
         
+        return dictionary.contains(word.lowercased())
     }
     
 }
