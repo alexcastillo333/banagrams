@@ -25,14 +25,12 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // the collectionview representing the gameBoard
     @IBOutlet weak var gameBoard: UICollectionView!
     
+    var game:Game!
     // the data source for the gameBoard
-    var grid: [[Tile?]]!
     
     
     let cellwidth = 70
     // dimensions for the gameBoard
-    var rows = 20
-    var cols = 20
     
     // will also need a data source for the player's hand
     // var hand: [[Tile]]    *may need to be a composed of different objects than a tile
@@ -46,8 +44,9 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        game = Game()
         let handHeight = self.view.frame.height / 5
-        let boardBounds = CGRect(x: 0, y: 0, width: cols * cellwidth, height: rows * cellwidth)
+        let boardBounds = CGRect(x: 0, y: 0, width: game.numRows * cellwidth, height: game.numRows * cellwidth)
         gameBoard.bounds = boardBounds
         gameBoard.frame = boardBounds
         let scrollFrame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y,width: self.view.frame.width, height: self.view.frame.height - handHeight)
@@ -64,15 +63,15 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         gameBoard.delaysContentTouches = true
         gameBoard.dragDelegate = self
         gameBoard.dropDelegate = self
-        grid = Array(repeating: Array(repeating: nil, count: cols), count: rows)
+        //grid = Array(repeating: Array(repeating: nil, count: cols), count: rows)
         
         //testing stuff
-        for i in 0...cols-1 {
-            grid[3][i] = Tile(letter: "F")
+        for i in 0...game.numRows-1 {
+            game.grid[3][i] = Tile(letter: "F")
         }
         
-        for i in 0...cols-1 {
-            grid[4][i] = Tile(letter: "O")
+        for i in 0...game.numRows-1 {
+            game.grid[4][i] = Tile(letter: "O")
         }
 
         // TODO: set the hand delegate and datasource
@@ -82,7 +81,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     
 
-   
+   // drop a tile onto the grid or into the user's hand
+    // TODO: differientiate the grid and the hand
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: any UICollectionViewDropCoordinator) {
         guard let destinationIndexPath = coordinator.destinationIndexPath else {
                 return
@@ -106,10 +106,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     let col = destinationIndexPath.item
                     let sourceRow = sourceIndexPath!.section
                     let sourceCol = sourceIndexPath!.item
-                    self.grid[sourceRow][sourceCol] = nil
+                    self.game.grid[sourceRow][sourceCol] = nil
                     let letter = Character(String(letterString))
                     
-                    self.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
+                    self.game.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
                     
                     // Reload collection view to reflect the changes
                     collectionView.reloadData()
@@ -133,30 +133,37 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     ) -> UICollectionViewDropProposal {
         let row = destinationIndexPath!.section
         let col = destinationIndexPath!.item
-        if grid[row][col] != nil {
+        if self.game.grid[row][col] != nil {
             return UICollectionViewDropProposal(operation: UIDropOperation.forbidden)
         }
         return UICollectionViewDropProposal(operation: UIDropOperation.move)
     }
     
     
+    // begin a draging a tile
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: any UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        // dragging a tile already on the board
         if collectionView == gameBoard {
             let row = indexPath.section
             let col = indexPath.item
-            if grid[row][col] == nil {
+            // cannot move an empty tile
+            if self.game.grid[row][col] == nil {
                 return []
+            // get the tile
             } else {
                 /*let model = dataSource[indexPath.item]
                  let itemProvider = NSItemProvider(object: model.image) //UIImage conforms to NSItemProviderWriting by default
                  let dragItem = UIDragItem(itemProvider: itemProvider)
                  dragItem.localObject = model //We can set the localObject property for convenience
                  return [dragItem]*/
-                let tile = grid[row][col]
+                let tile = self.game.grid[row][col]
                 let itemProvider = NSItemProvider(object: NSString(string: String(tile!.letter)))
                 let dragItem = UIDragItem(itemProvider: itemProvider)
                 return [dragItem]
             }
+            // dragging a tile in the hand
+        } else {
+            return []
         }
         
         return []
@@ -165,15 +172,17 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
   //   should only be able to drag and drop tiles with letters on to empty tiles
     func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        // moving tile on the gameboard
         if collectionView == self.gameBoard {
             let row = indexPath.section
             let col = indexPath.item
             // cannot move an empty tile.
-            if grid[row][col] == nil {
+            if self.game.grid[row][col] == nil {
                 return false
             } else {
                 return true
             }
+            // moving tile onto hand
         } else {
             return false
         }
@@ -183,7 +192,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return gameBoard
     }
 
-    
+    // set the spacing of the tiles in the grid
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let layout = UICollectionViewFlowLayout()
@@ -195,19 +204,20 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
    
     
-    
+    // return number of rows in grid
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         if collectionView == self.gameBoard {
-            return rows
+            return game.numRows
         }
         // placeholder , TODO: handle hand collection
         return 0
     }
     
     
+    // return number of columns in grid
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.gameBoard {
-            return cols
+            return game.numRows
         }
         // placeholder , TODO: handle hand collection
         return 0
@@ -215,18 +225,18 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
-    
+    // return the cells for the grid or the hand
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.gameBoard {
             let cell = gameBoard.dequeueReusableCell(withReuseIdentifier: gridCellid, for: indexPath) as! GridCell
             let row = indexPath.section
             let col = indexPath.item
           
-            if grid[row][col] == nil {
+            if self.game.grid[row][col] == nil {
                 cell.letter.text = ""
           
             } else {
-                cell.letter.text = String(grid[row][col]!.letter)
+                cell.letter.text = String(self.game.grid[row][col]!.letter)
             }
             cell.layer.borderWidth = 1
             return cell
