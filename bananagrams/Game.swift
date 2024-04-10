@@ -74,7 +74,6 @@ class Game {
         }
         // grid is initially empty
         grid = Array(repeating: Array(repeating: nil, count: numRows), count: numRows)
-        print(hand)
     }
     
     // return true if the user successfully peeled, remove a tile from the deck and place it into their hand. return false if the grid is not in a peelable state

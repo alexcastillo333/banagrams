@@ -74,32 +74,62 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             guard let destinationIndexPath = coordinator.destinationIndexPath else {
                 return
             }
-            coordinator.
             let sourceIndexPath = coordinator.items.first?.sourceIndexPath
-            coordinator.session.loadObjects(ofClass: NSString.self) { items in
-                // Ensure that items is an array of NSString objects
-                guard let letterStrings = items as? [NSString] else { return }
-                // Perform actions with the dropped data
-                for letterString in letterStrings {
-                    // Here you can access the dropped string and the destinationIndexPath
-                    // For example, you can update your data source with the dropped string
-                    // and reload the collection view to reflect the changes.
-                    // You can also use the destinationIndexPath to determine where the data should be placed.
+            if sourceIndexPath == nil {
+                coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                    // Ensure that items is an array of NSString objects
+                    guard let letterStrings = items as? [NSString] else {return}
+                    // Perform actions with the dropped data
+                    for letterString in letterStrings {
+                        // Here you can access the dropped string and the destinationIndexPath
+                        // For example, you can update your data source with the dropped string
+                        // and reload the collection view to reflect the changes.
+                        // You can also use the destinationIndexPath to determine where the data should be placed.
+                        
+                        // Example action: update your grid data source
+                        // Assuming grid is your data source, you might want to update it like this:
+                        let row = destinationIndexPath.section
+                        let col = destinationIndexPath.item
+                        let letter = Character(String(letterString))
+                        if self.game.hand[letter]! - 1 == 0 {
+                            self.game.hand.removeValue(forKey: letter)
+                        } else {
+                            self.game.hand[letter]! -= 1
+                        }
+                        self.game.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
+                        // Reload collection view to reflect the changes
+                        self.gameHand.reloadData()
+                        collectionView.reloadData()
+                    }
                     
-                    // Example action: update your grid data source
-                    // Assuming grid is your data source, you might want to update it like this:
-                    let row = destinationIndexPath.section
-                    let col = destinationIndexPath.item
-                    let sourceRow = sourceIndexPath!.section
-                    let sourceCol = sourceIndexPath!.item
-                    self.game.grid[sourceRow][sourceCol] = nil
-                    let letter = Character(String(letterString))
-                    self.game.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
-                    // Reload collection view to reflect the changes
-                    collectionView.reloadData()
+                }
+            } else {
+                coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                    // Ensure that items is an array of NSString objects
+                    guard let letterStrings = items as? [NSString] else { return }
+                    // Perform actions with the dropped data
+                    for letterString in letterStrings {
+                        // Here you can access the dropped string and the destinationIndexPath
+                        // For example, you can update your data source with the dropped string
+                        // and reload the collection view to reflect the changes.
+                        // You can also use the destinationIndexPath to determine where the data should be placed.
+                        
+                        // Example action: update your grid data source
+                        // Assuming grid is your data source, you might want to update it like this:
+                        let row = destinationIndexPath.section
+                        let col = destinationIndexPath.item
+                        let sourceRow = sourceIndexPath!.section
+                        let sourceCol = sourceIndexPath!.item
+                        self.game.grid[sourceRow][sourceCol] = nil
+                        let letter = Character(String(letterString))
+                        self.game.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
+                        // Reload collection view to reflect the changes
+                        collectionView.reloadData()
+                    }
                 }
             }
         } else if collectionView == self.gameHand {
+            
         }
        
     }
