@@ -54,15 +54,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         gameHand.dataSource = self
         gameHand.dragDelegate = self
         gameHand.dropDelegate = self
-        
-        //testing stuff
-        for i in 0...game.numRows-1 {
-            game.grid[3][i] = Tile(letter: "F")
-        }
-        
-        for i in 0...game.numRows-1 {
-            game.grid[4][i] = Tile(letter: "O")
-        }
+        gameBoard.allowsSelection = false
     }
     
     
@@ -70,68 +62,79 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
    // drop a tile onto the grid or into the user's hand
     // TODO: differientiate the grid and the hand
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: any UICollectionViewDropCoordinator) {
+        // dropping a tile onto the grid
         if collectionView == self.gameBoard {
             guard let destinationIndexPath = coordinator.destinationIndexPath else {
                 return
             }
             let sourceIndexPath = coordinator.items.first?.sourceIndexPath
+            // dragging from hand, dropping on grid
             if sourceIndexPath == nil {
                 coordinator.session.loadObjects(ofClass: NSString.self) { items in
-                    // Ensure that items is an array of NSString objects
-                    guard let letterStrings = items as? [NSString] else {return}
-                    // Perform actions with the dropped data
-                    for letterString in letterStrings {
-                        // Here you can access the dropped string and the destinationIndexPath
-                        // For example, you can update your data source with the dropped string
-                        // and reload the collection view to reflect the changes.
-                        // You can also use the destinationIndexPath to determine where the data should be placed.
-                        
-                        // Example action: update your grid data source
-                        // Assuming grid is your data source, you might want to update it like this:
-                        let row = destinationIndexPath.section
-                        let col = destinationIndexPath.item
-                        let letter = Character(String(letterString))
-                        if self.game.hand[letter]! - 1 == 0 {
-                            self.game.hand.removeValue(forKey: letter)
-                        } else {
-                            self.game.hand[letter]! -= 1
-                        }
-                        self.game.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
-                        // Reload collection view to reflect the changes
-                        self.gameHand.reloadData()
-                        collectionView.reloadData()
+                guard let letterStrings = items as? [NSString] else {return}
+                for letterString in letterStrings {
+                    let row = destinationIndexPath.section
+                    let col = destinationIndexPath.item
+                    let letter = Character(String(letterString))
+                    if self.game.hand[letter]! - 1 == 0 {
+                        self.game.hand.removeValue(forKey: letter)
+                    } else {
+                        self.game.hand[letter]! -= 1
                     }
-                    
+                    self.game.grid[row][col] = Tile(letter: letter)
+                    self.gameHand.reloadData()
+                    collectionView.reloadData()
                 }
+                }
+            // dragging from grid, dropping on grid
             } else {
                 coordinator.session.loadObjects(ofClass: NSString.self) { items in
-                    // Ensure that items is an array of NSString objects
-                    guard let letterStrings = items as? [NSString] else { return }
-                    // Perform actions with the dropped data
+                guard let letterStrings = items as? [NSString] else { return }
+                for letterString in letterStrings {
+                    let row = destinationIndexPath.section
+                    let col = destinationIndexPath.item
+                    let sourceRow = sourceIndexPath!.section
+                    let sourceCol = sourceIndexPath!.item
+                    self.game.grid[sourceRow][sourceCol] = nil
+                    let letter = Character(String(letterString))
+                    self.game.grid[row][col] = Tile(letter: letter)
+                    collectionView.reloadData()
+                }
+                }
+            }
+        // dropping a tile back into your hand
+        } else if collectionView == self.gameHand {
+            let sourceIndexPath = coordinator.items.first?.sourceIndexPath
+            // dragging from grid, dropping in hand
+            if sourceIndexPath == nil {
+                coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                    guard let letterStrings = items as? [NSString] else {return}
                     for letterString in letterStrings {
-                        // Here you can access the dropped string and the destinationIndexPath
-                        // For example, you can update your data source with the dropped string
-                        // and reload the collection view to reflect the changes.
-                        // You can also use the destinationIndexPath to determine where the data should be placed.
-                        
-                        // Example action: update your grid data source
-                        // Assuming grid is your data source, you might want to update it like this:
-                        let row = destinationIndexPath.section
-                        let col = destinationIndexPath.item
-                        let sourceRow = sourceIndexPath!.section
-                        let sourceCol = sourceIndexPath!.item
-                        self.game.grid[sourceRow][sourceCol] = nil
+                        let sourceIndexPath = self.gameBoard.indexPathsForSelectedItems![0]
+                        let row = sourceIndexPath.section
+                        let col = sourceIndexPath.item
+                        self.game.grid[row][col] = nil
+                        self.gameBoard.reloadData()
+                        self.gameBoard.allowsSelection = false
                         let letter = Character(String(letterString))
-                        self.game.grid[row][col] = Tile(letter: letter) // Assuming YourTile is your data model for tiles
-                        // Reload collection view to reflect the changes
-                        collectionView.reloadData()
+                        if self.game.hand[letter] == nil {
+                            self.game.hand[letter] = 1
+                        } else {
+                            self.game.hand[letter]! += 1
+                        }
+                        self.gameHand.reloadData()
+                    }
+                }
+            // dragging from hand, placing back in hand (no need to do anything)
+            } else {
+                coordinator.session.loadObjects(ofClass: NSString.self) { items in
+                    guard let letterStrings = items as? [NSString] else { return }
+                    for letterString in letterStrings {
+                        print(letterString)
                     }
                 }
             }
-        } else if collectionView == self.gameHand {
-            
         }
-       
     }
     
    func collectionView(_ collectionView: UICollectionView,
@@ -156,7 +159,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
             return UICollectionViewDropProposal(operation: UIDropOperation.move)
         } else if collectionView == self.gameHand {
-            print("checkcheck")
+            return UICollectionViewDropProposal(operation: UIDropOperation.move)
         }
         return UICollectionViewDropProposal(operation: UIDropOperation.move)
     }
@@ -173,17 +176,15 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 return []
             // get the tile
             } else {
-                /*let model = dataSource[indexPath.item]
-                 let itemProvider = NSItemProvider(object: model.image) //UIImage conforms to NSItemProviderWriting by default
-                 let dragItem = UIDragItem(itemProvider: itemProvider)
-                 dragItem.localObject = model //We can set the localObject property for convenience
-                 return [dragItem]*/
+                // these two lines allow access to the index when dragging from the grid to the hand
+                self.gameBoard.allowsSelection = true
+                self.gameBoard.selectItem(at: indexPath, animated: false, scrollPosition: [])
                 let tile = self.game.grid[row][col]
                 let itemProvider = NSItemProvider(object: NSString(string: String(tile!.letter)))
                 let dragItem = UIDragItem(itemProvider: itemProvider)
                 return [dragItem]
             }
-            // dragging a tile in the hand
+        // dragging a tile in the hand
         } else if collectionView == gameHand {
             let cell = gameHand.dequeueReusableCell(withReuseIdentifier: handCellid, for: indexPath) as! HandCell
             let keys = Array(game.hand.keys).sorted()
@@ -191,7 +192,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let itemProvider = NSItemProvider(object: NSString(string: String(key)))
             let dragItem = UIDragItem(itemProvider: itemProvider)
             print(dragItem)
-            print("drag from hand to grid")
             return [dragItem]
         }
         return []
