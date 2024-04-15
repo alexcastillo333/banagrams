@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OJ3-dr-YJO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -199,9 +199,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="stock image profile pic" translatesAutoresizingMaskIntoConstraints="NO" id="bGN-Pu-OVl">
-                                <rect key="frame" x="106" y="0.0" width="181" height="350"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2A6-65-fGr">
+                                <rect key="frame" x="138" y="263" width="115" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Set Avatar">
+                                    <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="20"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="setAvatarButtonClicked:" destination="oKe-sz-i52" eventType="touchUpInside" id="y0J-vS-OST"/>
+                                    <action selector="signUpButtonPressed:" destination="Nu3-uT-Lnp" eventType="touchUpInside" id="B56-69-UCp"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Best Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5P-so-Woa">
                                 <rect key="frame" x="155" y="372" width="83" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -254,17 +264,17 @@
                                     <action selector="logoutButtonPressed:" destination="oKe-sz-i52" eventType="touchUpInside" id="8PN-Ba-4Xe"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9DF-a8-l1L">
+                                <rect key="frame" x="75" y="117" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Hrm-w9-TIb"/>
                         <color key="backgroundColor" red="0.99755531549999998" green="0.99730165719999997" blue="0.70008185079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                        <constraints>
-                            <constraint firstItem="bGN-Pu-OVl" firstAttribute="top" secondItem="Hrm-w9-TIb" secondAttribute="top" id="Lwg-Dx-L1e"/>
-                            <constraint firstItem="bGN-Pu-OVl" firstAttribute="leading" secondItem="Hhz-JB-J2A" secondAttribute="leading" constant="106" id="X6o-tT-mPJ"/>
-                            <constraint firstItem="Hrm-w9-TIb" firstAttribute="trailing" secondItem="bGN-Pu-OVl" secondAttribute="trailing" constant="106" id="tsk-rf-na9"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="uE7-em-8Eo"/>
                     <connections>
+                        <outlet property="imageView" destination="9DF-a8-l1L" id="7hz-UY-DDw"/>
                         <outlet property="playerNameLabel" destination="IvM-Gr-s7V" id="AER-cO-7yJ"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegueIdentifier" modalPresentationStyle="fullScreen" id="COG-wT-k3U"/>
                     </connections>
@@ -294,6 +304,9 @@
                                     <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="18"/>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="OJ3-dr-YJO" kind="presentation" modalPresentationStyle="fullScreen" id="KzT-1t-2dt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ut3-f2-dZK">
                                 <rect key="frame" x="133" y="531" width="126" height="35"/>
@@ -593,6 +606,7 @@ keep peeling until there are no letters left!</string>
                         <viewLayoutGuide key="safeArea" id="3p4-VD-4dB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="LOQ-S4-Kvw"/>
                     <connections>
                         <outlet property="gameBoard" destination="FHR-Hm-fBd" id="oKB-0j-lyB"/>
                         <outlet property="gameHand" destination="h2c-Ea-Q37" id="bvN-xS-Knk"/>
@@ -604,7 +618,6 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="o5t-ve-gpB"/>
         <segue reference="hJr-mZ-wPS"/>
         <segue reference="COG-wT-k3U"/>
     </inferredMetricsTieBreakers>
@@ -613,12 +626,11 @@ keep peeling until there are no letters left!</string>
         <image name="gearshape" catalog="system" width="128" height="123"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="profile_icon" width="85.333335876464844" height="85.333335876464844"/>
-        <image name="stock image profile pic" width="350" height="350"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

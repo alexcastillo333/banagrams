@@ -31,6 +31,7 @@
 		B8824EBE2BA6E35C00F534D2 /* FirebaseAppCheck in Frameworks */ = {isa = PBXBuildFile; productRef = B8824EBD2BA6E35C00F534D2 /* FirebaseAppCheck */; };
 		B8824EC32BA6F14300F534D2 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8824EC22BA6F14300F534D2 /* SignUpViewController.swift */; };
 		B8824EC62BA6F78D00F534D2 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B8824EC52BA6F78D00F534D2 /* FirebaseAuth */; };
+		B8869E152BCDA9FC008F30AE /* defaultAvatar.png in Resources */ = {isa = PBXBuildFile; fileRef = B8869E142BCDA9FB008F30AE /* defaultAvatar.png */; };
 		B8E1AA6B2B9A63370046E257 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1AA6A2B9A63370046E257 /* AppDelegate.swift */; };
 		B8E1AA6D2B9A63370046E257 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1AA6C2B9A63370046E257 /* SceneDelegate.swift */; };
 		B8E1AA6F2B9A63370046E257 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E1AA6E2B9A63370046E257 /* ViewController.swift */; };
@@ -113,6 +114,7 @@
 		B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bananagrams.entitlements; sourceTree = "<group>"; };
 		B8824EC02BA6E55D00F534D2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B8824EC22BA6F14300F534D2 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		B8869E142BCDA9FB008F30AE /* defaultAvatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultAvatar.png; sourceTree = "<group>"; };
 		B8E1AA672B9A63370046E257 /* bananagrams.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bananagrams.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8E1AA6A2B9A63370046E257 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8E1AA6C2B9A63370046E257 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				B8E1AA702B9A63380046E257 /* Main.storyboard */,
 				84535D032BC5E83B00D9D0C6 /* HandCell.swift */,
 				84A4B8F12BC34A7100AA4159 /* GridCell.swift */,
+				B8869E142BCDA9FB008F30AE /* defaultAvatar.png */,
 				84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */,
 				B8579EB82BBDF2B800DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 */,
 				84E2BDF12BB56426006D3A2B /* Tile.swift */,
@@ -376,6 +379,7 @@
 			files = (
 				B8579EB92BBDF2B900DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 in Resources */,
 				B8579EB72BBDEF1200DFCDCC /* croppedLofi.mp3 in Resources */,
+				B8869E152BCDA9FC008F30AE /* defaultAvatar.png in Resources */,
 				B8E1AA7A2B9A63400046E257 /* LaunchScreen.storyboard in Resources */,
 				B87C18652BB69F84000AF925 /* GoogleService-Info.plist in Resources */,
 				84535D002BC5D9BF00D9D0C6 /* scrabble_words.txt in Resources */,
