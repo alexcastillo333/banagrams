@@ -10,6 +10,7 @@ import UIKit
 // Screen for the gameplay
 class GameViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIScrollViewDelegate {
     
+    @IBOutlet weak var peelButton: UIButton!
     // the collectionview representing the gameBoard / grid
     @IBOutlet weak var gameBoard: UICollectionView!
     // the collectionview representing the hand
@@ -55,12 +56,12 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         gameHand.dragDelegate = self
         gameHand.dropDelegate = self
         gameBoard.allowsSelection = false
+        peelButton.isHidden = true
     }
     
     
 
    // drop a tile onto the grid or into the user's hand
-    // TODO: differientiate the grid and the hand
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: any UICollectionViewDropCoordinator) {
         // dropping a tile onto the grid
         if collectionView == self.gameBoard {
@@ -76,14 +77,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     let row = destinationIndexPath.section
                     let col = destinationIndexPath.item
                     let letter = Character(String(letterString))
-                    if self.game.hand[letter]! - 1 == 0 {
-                        self.game.hand.removeValue(forKey: letter)
-                    } else {
-                        self.game.hand[letter]! -= 1
-                    }
-                    self.game.grid[row][col] = Tile(letter: letter)
+                    self.game.handToGrid(letter: letter, row: row, col: col)
                     self.gameHand.reloadData()
                     collectionView.reloadData()
+                    self.peelButton.isHidden = !self.game.canPeel
                 }
                 }
             // dragging from grid, dropping on grid
@@ -95,9 +92,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     let col = destinationIndexPath.item
                     let sourceRow = sourceIndexPath!.section
                     let sourceCol = sourceIndexPath!.item
-                    self.game.grid[sourceRow][sourceCol] = nil
                     let letter = Character(String(letterString))
-                    self.game.grid[row][col] = Tile(letter: letter)
+                    self.game.gridtoGrid(letter: letter, sourceRow: sourceRow, sourceCol: sourceCol, destRow: row, destCol: col)
                     collectionView.reloadData()
                 }
                 }
@@ -113,27 +109,14 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         let sourceIndexPath = self.gameBoard.indexPathsForSelectedItems![0]
                         let row = sourceIndexPath.section
                         let col = sourceIndexPath.item
-                        self.game.grid[row][col] = nil
-                        self.gameBoard.reloadData()
-                        self.gameBoard.allowsSelection = false
                         let letter = Character(String(letterString))
-                        if self.game.hand[letter] == nil {
-                            self.game.hand[letter] = 1
-                        } else {
-                            self.game.hand[letter]! += 1
-                        }
+                        self.game.gridtoHand(letter: letter, row: row, col: col)
+                        self.gameBoard.allowsSelection = false
+                        self.gameBoard.reloadData()
                         self.gameHand.reloadData()
                     }
                 }
-            // dragging from hand, placing back in hand (no need to do anything)
-            } else {
-                coordinator.session.loadObjects(ofClass: NSString.self) { items in
-                    guard let letterStrings = items as? [NSString] else { return }
-                    for letterString in letterStrings {
-                        print(letterString)
-                    }
-                }
-            }
+           }
         }
     }
     
@@ -143,6 +126,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
        return true
    }
     
+    @IBAction func peelButtonPressed(_ sender: Any) {
+        self.game.peel()
+        self.gameHand.reloadData()
+    }
     
     // determine if you are able to drop a tile at a location
     // parameter collectionView is the destination collectionView
@@ -191,7 +178,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let key = keys[indexPath.item]
             let itemProvider = NSItemProvider(object: NSString(string: String(key)))
             let dragItem = UIDragItem(itemProvider: itemProvider)
-            print(dragItem)
             return [dragItem]
         }
         return []
