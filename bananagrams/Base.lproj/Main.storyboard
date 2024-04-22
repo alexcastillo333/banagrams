@@ -624,7 +624,31 @@ keep peeling until there are no letters left!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yz-C1-VCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1742.7480916030534" y="722.53521126760563"/>
+            <point key="canvasLocation" x="2442" y="723"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="ipK-A3-i7e">
+            <objects>
+                <viewController id="G2T-dH-dwP" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="brp-Pv-38g">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDa-3T-s7q">
+                                <rect key="frame" x="31" y="149" width="330" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="36"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="cfA-V4-fZS"/>
+                        <color key="backgroundColor" red="0.99755531549999998" green="0.99730165719999997" blue="0.70008185079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bnR-p6-juD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1475.5725190839694" y="722.53521126760563"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -640,7 +664,7 @@ keep peeling until there are no letters left!</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
