@@ -25,6 +25,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     let gridCellid = "gridCell"
     // cell identifier for the hand collectionView cells
     let handCellid = "handCell"
+    
+    
 
     // set up the screen, (scrollview is needed for horizontal scrolling of the gameBoard)
     override func viewDidLoad() {
@@ -57,8 +59,35 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         gameHand.dropDelegate = self
         gameBoard.allowsSelection = false
         peelButton.isHidden = true
+        gameHand.allowsSelection = true
+        gameHand.allowsMultipleSelection = false
+        // for detecting shaking
+        becomeFirstResponder()
     }
     
+
+    
+    // allow this screen to recognize motion
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        if motion == .motionShake {
+            print(gameHand.indexPathsForSelectedItems)
+            if !self.gameHand.indexPathsForSelectedItems!.isEmpty {
+                let idx = self.gameHand.indexPathsForSelectedItems![0]
+                let keys = Array(game.hand.keys).sorted()
+                let key = keys[idx.item]
+                print("dumping")
+            }
+        }
+    }
+    
+    
+    
+  
     
 
    // drop a tile onto the grid or into the user's hand
@@ -80,7 +109,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.game.handToGrid(letter: letter, row: row, col: col)
                     self.gameHand.reloadData()
                     collectionView.reloadData()
-                    self.peelButton.isHidden = !self.game.canPeel
+                    print(self.gameHand.indexPathsForSelectedItems!.count)
                 }
                 }
             // dragging from grid, dropping on grid
@@ -111,6 +140,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         let col = sourceIndexPath.item
                         let letter = Character(String(letterString))
                         self.game.gridtoHand(letter: letter, row: row, col: col)
+                        self.peelButton.isHidden = !self.game.hand.isEmpty
                         self.gameBoard.allowsSelection = false
                         self.gameBoard.reloadData()
                         self.gameHand.reloadData()
@@ -121,13 +151,18 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
    func collectionView(_ collectionView: UICollectionView,
-        canHandle session: any UIDropSession
-   ) -> Bool {
+        canHandle session: any UIDropSession) -> Bool {
        return true
    }
     
     @IBAction func peelButtonPressed(_ sender: Any) {
-        self.game.peel()
+        if !self.game.peel() {
+            print("play peel failed sound effect")
+        }
+        if self.game.gameOver == true {
+            print("you win")
+        }
+        self.peelButton.isHidden = !self.game.hand.isEmpty
         self.gameHand.reloadData()
     }
     
@@ -152,6 +187,14 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if collectionView == self.gameHand {
+            cell.backgroundColor = UIColor.yellow
+        }
+    }
+    
+    
     // begin a draging a tile
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: any UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         // dragging a tile already on the board
@@ -173,7 +216,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         // dragging a tile in the hand
         } else if collectionView == gameHand {
-            let cell = gameHand.dequeueReusableCell(withReuseIdentifier: handCellid, for: indexPath) as! HandCell
             let keys = Array(game.hand.keys).sorted()
             let key = keys[indexPath.item]
             let itemProvider = NSItemProvider(object: NSString(string: String(key)))

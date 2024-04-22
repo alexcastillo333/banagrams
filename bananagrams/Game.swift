@@ -15,10 +15,9 @@ class Game {
     
     // you can only peel when this is true
     // update this var evertime you move a tile
-    var canPeel = false
     //    var validWords = false
     //    var canDump = true
-    
+    var gameOver = false
     // this var tracks if all the letters are adjacent to each other on the grid, you cannot peel if this is false
     var isContinuous = true
     // a tuple of the row and col values of the last placed index on the grid, used to check if all tiles are continous or not
@@ -47,7 +46,6 @@ class Game {
     // Initializer deckspec is the number of each letter in the deck. numPlayers is how many players there are (only single player implementation as of now
     init(deckSpec:[Int] = [13, 3, 3, 6, 18, 3, 4, 3, 12, 2, 2, 5, 3, 8 ,11, 3, 2 ,9, 6, 9 , 6, 3, 3, 2 , 3, 2], numPlayers:Int = 1)  {
         
-        //canPeel = false
         // should be able to dump immediately (assuming deck has at least 24 tiles)
         //canDump = true
         //isContinuous = true
@@ -87,9 +85,21 @@ class Game {
         lastPlacedIndex = (-1, -1)
     }
     
-    // return the letter that this player peeled, or nil if they tried to peel on an invalid
-    func peel() {
+    
+//    func dump(letter:Character) -> {
+//        
+//    }
+    
+    // if a player peels, see if they have a valid tile layout, if they do, draw a random letter from the bunch and place it in their hand
+    // or set gameOver to true if no letters left to peel
+    // if not, return false.
+    func peel() -> Bool {
         if checkPeelConditions() {
+            if  bunch.isEmpty {
+                gameOver = true
+                print("you win")
+                return true
+            }
             let randomIndex = Int.random(in: 0..<bunch.count)
             let letter = bunch.remove(at: randomIndex)
             if hand[letter] == nil {
@@ -100,7 +110,9 @@ class Game {
             //update bunch
             let letteridx = Int(letter.asciiValue! - 65)
             bunchCounts[letteridx] -= 1
+            return true
         }
+        return false
     }
     
     
@@ -159,7 +171,7 @@ class Game {
         checkPeelConditionsHelper(row: row + 1, col: col, visited: &visited, count: &count)
         checkPeelConditionsHelper(row: row - 1, col: col, visited: &visited, count: &count)
         checkPeelConditionsHelper(row: row, col: col + 1, visited: &visited, count: &count)
-        checkPeelConditionsHelper(row: row + 1, col: col - 1, visited: &visited, count: &count)
+        checkPeelConditionsHelper(row: row, col: col - 1, visited: &visited, count: &count)
     }
     
     
@@ -176,7 +188,6 @@ class Game {
         lastPlacedIndex.0 = row
         lastPlacedIndex.1 = col
         tilesOnGrid += 1
-        canPeel = hand.isEmpty
     }
     
     // move a tile from the grid back into the players hand
@@ -252,7 +263,6 @@ class Game {
     
     // check if a word is in the playable words set
     func checkWord(word:String) -> Bool {
-        print(word)
         return Game.playableWords.contains(word)
     }
     
