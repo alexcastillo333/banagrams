@@ -12,7 +12,6 @@
 		84535D022BC5DA1800D9D0C6 /* ValidWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84535D012BC5DA1800D9D0C6 /* ValidWords.swift */; };
 		84535D042BC5E83B00D9D0C6 /* HandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84535D032BC5E83B00D9D0C6 /* HandCell.swift */; };
 		84599CD92BC336B8009EF4FF /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84599CD82BC336B8009EF4FF /* Game.swift */; };
-		84610D662BD753CC006AE6A8 /* gameOverPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84610D652BD753CC006AE6A8 /* gameOverPopUp.swift */; };
 		848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 848F27322BA806B500A413F4 /* InstructionsViewController.swift */; };
 		84A4B8F22BC34A7100AA4159 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A4B8F12BC34A7100AA4159 /* GridCell.swift */; };
 		84E2BDF02BB563E0006D3A2B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */; };
@@ -101,7 +100,6 @@
 		84535D012BC5DA1800D9D0C6 /* ValidWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidWords.swift; sourceTree = "<group>"; };
 		84535D032BC5E83B00D9D0C6 /* HandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCell.swift; sourceTree = "<group>"; };
 		84599CD82BC336B8009EF4FF /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
-		84610D652BD753CC006AE6A8 /* gameOverPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = gameOverPopUp.swift; sourceTree = "<group>"; };
 		848F27322BA806B500A413F4 /* InstructionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsViewController.swift; sourceTree = "<group>"; };
 		84A4B8F12BC34A7100AA4159 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 		B8E1AA5E2B9A63370046E257 = {
 			isa = PBXGroup;
 			children = (
-				84610D652BD753CC006AE6A8 /* gameOverPopUp.swift */,
 				B8E1AA692B9A63370046E257 /* bananagrams */,
 				B8E1AA682B9A63370046E257 /* Products */,
 				B8824EC42BA6F78D00F534D2 /* Frameworks */,
@@ -411,7 +408,6 @@
 				84535D042BC5E83B00D9D0C6 /* HandCell.swift in Sources */,
 				848F27332BA806B500A413F4 /* InstructionsViewController.swift in Sources */,
 				84599CD92BC336B8009EF4FF /* Game.swift in Sources */,
-				84610D662BD753CC006AE6A8 /* gameOverPopUp.swift in Sources */,
 				84E2BDF22BB56426006D3A2B /* Tile.swift in Sources */,
 				2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */,
 				B8E1AA752B9A63380046E257 /* bananagrams.xcdatamodeld in Sources */,
