@@ -8,6 +8,7 @@
 import UIKit
 
 import AVFoundation
+import CoreData
 class AudioManager {
     static let shared = AudioManager()
     
@@ -42,26 +43,60 @@ class AudioManager {
 }
 class SettingsViewController: UIViewController {
     @IBOutlet weak var musicSwitch: UISwitch!
-    @IBOutlet weak var randomButton: SoundButton!
+    @IBOutlet weak var colorThemeButton: UIButton!
+    var email: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         musicSwitch.isOn = AudioManager.shared.audioPlayer?.isPlaying ?? false
+        setupColorThemeDropdown()
+        
         
         // Do any additional setup after loading the view.
     }
     
-    
-    @IBAction func darkModeSwitchFlipped(_ sender: UISwitch) {
-       
+    func setupColorThemeDropdown() {
+        let colorActions = [
+            
+            UIAction(title: "Violet and Pink") { _ in
+                self.saveSelectedColorTheme(theme: "theme3")
+            },
+            
+            UIAction(title: "White and Black") { _ in
+                self.saveSelectedColorTheme(theme: "theme2")
+            },
+            UIAction(title: "Default") { _ in
+                self.saveSelectedColorTheme(theme: "theme1")
+            }
+        ]
+
+        let menu = UIMenu(title: "Select Game Color", options: .displayInline, children: colorActions)
+        colorThemeButton.menu = menu
+        colorThemeButton.showsMenuAsPrimaryAction = true
     }
+    
+    func saveSelectedColorTheme(theme: String) {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                user.colors = theme
+                try context.save()
+                print("for email \(email) color saved = \(theme)")
+            }
+        } catch {
+            print("ERROR SAVING IMAGE")
+        }
+        
+    }
+    
     
     @IBAction func soundEffectsSwitchFlipped(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "SoundEffectsEnabled")
         
     }
     
-    @IBAction func randomButtonPressed(_ sender: Any) {
-    }
+
     @IBAction func musicSwitchFlipped(_ sender: UISwitch) {
         AudioManager.shared.toggleMusic(sender.isOn)
         print("Sound effects setting changed: \(sender.isOn)")

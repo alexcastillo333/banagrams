@@ -53,7 +53,18 @@ class HomeScreenViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "profileSegueIdentifier" {
             if let nextVC = segue.destination as? ProfileViewController {
+                nextVC.email = email
                 nextVC.username = username
+            }
+        }
+        if segue.identifier == "settingsSegueIdentifier" {
+            if let nextVC = segue.destination as? SettingsViewController {
+                nextVC.email = email
+            }
+        }
+        if segue.identifier == "gameSegueIdentifier" {
+            if let nextVC = segue.destination as? GameViewController {
+                nextVC.email = email
             }
         }
     }

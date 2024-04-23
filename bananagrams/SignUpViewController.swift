@@ -60,6 +60,7 @@ class SignUpViewController: UIViewController {
         let userStored = NSEntityDescription.insertNewObject(forEntityName: "User", into: contextSignUp)
         userStored.setValue(username, forKey: "username")
         userStored.setValue(email, forKey:"email")
+        userStored.setValue("theme1", forKey:"colors")
         // Set other attributes as needed
         do {
             try contextSignUp.save()

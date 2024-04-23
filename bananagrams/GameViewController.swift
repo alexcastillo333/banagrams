@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 // Screen for the gameplay
 class GameViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIScrollViewDelegate {
@@ -26,7 +27,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // cell identifier for the hand collectionView cells
     let handCellid = "handCell"
     
-    
+    // email used to load correct color theme
+    var email: String?
 
     // set up the screen, (scrollview is needed for horizontal scrolling of the gameBoard)
     override func viewDidLoad() {
@@ -82,6 +84,47 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 let key = keys[idx.item]
                 print("dumping")
             }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyColorScheme()
+    }
+    
+    func applyColorScheme() {
+        guard let email = email else {
+            print("Email is nil")
+            return
+        }
+
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                print("User found: \(user.username ?? "[username not available]")")
+                if let theme = user.colors {
+                    switch theme {
+                    case "theme1":
+                        let primaryColor = UIColor(red: 255/255, green: 235/255, blue: 205/255, alpha: 1.0) // An approximation to light beige
+                        let secondaryColor = UIColor(red: 210/255, green: 180/255, blue: 140/255, alpha: 1.0) // A darker beige or tan color
+                        gameBoard.backgroundColor = primaryColor
+                        gameHand.backgroundColor = secondaryColor
+                    case "theme2":
+                        gameBoard.backgroundColor = UIColor.white
+                        gameHand.backgroundColor = UIColor.black
+                    case "theme3":
+                        gameBoard.backgroundColor = UIColor.systemPink
+                        gameHand.backgroundColor = UIColor.systemPurple
+                    default:
+                        break
+                    }
+                }
+            }
+        } catch {
+            print("ERROR LOADING COLORS: \(error.localizedDescription)")
         }
     }
     

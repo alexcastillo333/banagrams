@@ -11,6 +11,7 @@ import CoreData
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     var username: String?
+    var email: String?
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -28,14 +29,14 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
 
     
     func loadAvatarImage() {
-        guard let username = username else {
-            print("Username is nil")
+        guard let email = email else {
+            print("Email is nil")
             imageView.image = UIImage(named: "defaultAvatar")
             return
         }
 
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "username == %@", username)
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
 
         do {
             let results = try context.fetch(fetchRequest)
@@ -75,12 +76,12 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
     
     func saveAvatarImage(_ image: UIImage) {
             let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "username == %@", username ?? "")
+            fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
             
             do {
                 let results = try context.fetch(fetchRequest)
                 if let user = results.first {
-                    if let imageData = image.pngData() { // You can also use jpegData(compressionQuality:) if you prefer
+                    if let imageData = image.pngData() { 
                         user.avatar = imageData
                         try context.save()
                     }
@@ -129,6 +130,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         if segue.identifier == "profileToHomeSegueIdentifier" {
             if let nextVC = segue.destination as? HomeScreenViewController {
                 nextVC.username = self.username ?? "none"
+                nextVC.email = self.email ?? "none"
             }
         }
     }
