@@ -50,15 +50,19 @@ class Game {
         tilesOnGrid = 0
         // initialize deck: for each letter in the alphabet, add the letter to the deck the number of times specified in deckSpec
         for letter in 0...25 {
-            for _ in 1...deckSpec[letter] {
-                bunch.append(Character(UnicodeScalar(65 + letter)!))
+            //for _ in 1...deckSpec[letter] {
+            print(deckSpec[letter])
+            if deckSpec[letter] > 0 {
+                for _ in 1...deckSpec[letter] {
+                    bunch.append(Character(UnicodeScalar(65 + letter)!))
+                }
             }
         }
         
         // initialize hand by randomly removing 21 indices(letters) from deck, update bunch and hand accordingly
         
         // TODO: change this back to 21 when testing is finished
-        for _ in 1...10 {
+        for _ in 1...2 {
             // randomly remove letter from
             let randomIndex = Int.random(in: 0..<bunch.count)
             let letter = bunch.remove(at: randomIndex)

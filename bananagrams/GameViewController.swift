@@ -16,6 +16,15 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var gameBoard: UICollectionView!
     // the collectionview representing the hand
     @IBOutlet weak var gameHand: UICollectionView!
+    
+    
+    
+    // count the time until the game ends
+    var timer:UILabel!
+    // numner of seconds that have passed
+    var time = 0
+    // queue for updating timer
+    var queue: DispatchQueue!
     // this contains the data sources for the gameBoard and methods for manipulating them
     var game:Game!
     // the width and height of the gameBoard cells on the screen
@@ -29,11 +38,16 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // email used to load correct color theme
     var email: String?
-
+    
+  
+    
     // set up the screen, (scrollview is needed for horizontal scrolling of the gameBoard)
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = Game()
+        var array = Array(repeating: 0, count: 26)
+        array[0] = 2
+        game = Game(deckSpec: array)
+        // game = game()
         let handHeight = self.view.frame.height / 5
         
         let boardBounds = CGRect(x: 0, y: 0, width: game.numRows * gridCellWidth, height: game.numRows * gridCellWidth)
@@ -63,11 +77,37 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         peelButton.isHidden = true
         gameHand.allowsSelection = true
         gameHand.allowsMultipleSelection = false
+        
+        
+        // make the timer
+        let timerSize = CGSize(width: 90.0, height: 40.0)
+        let timerOrigin = CGPoint(x: (self.view.frame.width - 90) / 2, y: 60)
+        timer = UILabel(frame: CGRect(origin: timerOrigin, size: timerSize))
+        timer.backgroundColor = UIColor.black
+        timer.layer.cornerRadius = 10
+        timer.textColor = UIColor.white
+        timer.textAlignment = .center
+        self.view.addSubview(timer)
+        self.view.bringSubviewToFront(timer)
+        queue = DispatchQueue(label: "myQueue", qos: .userInitiated)
         // for detecting shaking
         becomeFirstResponder()
     }
     
-
+    
+    func timerStart() {
+        while !game.gameOver {
+            
+            usleep(1000000)
+            self.time += 1
+            DispatchQueue.main.async {
+                let minutes = self.time / 60
+                let seconds = self.time % 60
+                let timeString = String(format: "%02d:%02d", minutes, seconds)
+                self.timer.text = timeString
+            }
+        }
+    }
     
     // allow this screen to recognize motion
     override var canBecomeFirstResponder: Bool {
@@ -105,6 +145,14 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         applyColorScheme()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        timer.text = "0:00"
+        queue.async {
+            self.timerStart()
+        }
     }
     
     func applyColorScheme() {
