@@ -73,14 +73,29 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
+    // shake to dump
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            print(gameHand.indexPathsForSelectedItems)
-            if !self.gameHand.indexPathsForSelectedItems!.isEmpty {
-                let idx = self.gameHand.indexPathsForSelectedItems![0]
-                let keys = Array(game.hand.keys).sorted()
-                let key = keys[idx.item]
-                print("dumping")
+            // can only dump when at least 3 tiles are in the bunch
+            if self.game.bunch.count > 3 {
+                if !self.gameHand.indexPathsForSelectedItems!.isEmpty {
+                    let idx = self.gameHand.indexPathsForSelectedItems![0]
+                    let lettersInHand = Array(game.hand.keys).sorted()
+                    let letterToDump = lettersInHand[idx.item]
+                    UIView.animate(withDuration: 1.0,
+                                   animations: { let dumpee = self.gameHand.cellForItem(at: idx) as! HandCell
+                        
+                        dumpee.center.y += self.gameHand.frame.height
+                        dumpee.transform = dumpee.transform.rotated(by: CGFloat(Double.pi) * 3)
+                                                },
+                                   completion: {_ in
+                        let newTiles = self.game.dump(letter: letterToDump)
+                        self.gameBoard.reloadData()
+                        self.gameHand.reloadData()
+                        self.peelButton.isHidden = !self.game.hand.isEmpty
+                    }
+                    )
+                }
             }
         }
     }
@@ -109,7 +124,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.game.handToGrid(letter: letter, row: row, col: col)
                     self.gameHand.reloadData()
                     collectionView.reloadData()
-                    print(self.gameHand.indexPathsForSelectedItems!.count)
+                    self.peelButton.isHidden = !self.game.hand.isEmpty
+
                 }
                 }
             // dragging from grid, dropping on grid
@@ -140,10 +156,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         let col = sourceIndexPath.item
                         let letter = Character(String(letterString))
                         self.game.gridtoHand(letter: letter, row: row, col: col)
-                        self.peelButton.isHidden = !self.game.hand.isEmpty
                         self.gameBoard.allowsSelection = false
                         self.gameBoard.reloadData()
                         self.gameHand.reloadData()
+                        self.peelButton.isHidden = !self.game.hand.isEmpty
                     }
                 }
            }
@@ -310,4 +326,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         return gameBoard.dequeueReusableCell(withReuseIdentifier: gridCellid, for: indexPath)
     }
+    
+    
+    
 }
