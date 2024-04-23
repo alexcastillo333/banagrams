@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 // The class for information about a game, contains a grid, and the hand
 class Game {
     // a set of all playable words
@@ -36,8 +35,6 @@ class Game {
     
     
     // (like a bunch of bananas)
-    //  the counts for each letter in the pile of letters that players peel from and dump into/from: contains 26 integers, integer at index 0 represents the number of A's in the deck ... integer at index 25 represents the number of Z's in the deck. The integers at these indicices will change as the user peels and dumps but it will never grow larger than the total sum at the beginning
-    var bunchCounts:[Int]
     // the actual letters in the bunch, used to randomly select a tiles when a player peels or dumps
     var bunch:[Character]
     // The letters in a player's hand, this will be the data source for the hand on the gameViewController
@@ -49,7 +46,6 @@ class Game {
         // should be able to dump immediately (assuming deck has at least 24 tiles)
         //canDump = true
         //isContinuous = true
-        bunchCounts = deckSpec
         bunch = []
         tilesOnGrid = 0
         // initialize deck: for each letter in the alphabet, add the letter to the deck the number of times specified in deckSpec
@@ -60,6 +56,8 @@ class Game {
         }
         
         // initialize hand by randomly removing 21 indices(letters) from deck, update bunch and hand accordingly
+        
+        // TODO: change this back to 21 when testing is finished
         for _ in 1...10 {
             // randomly remove letter from
             let randomIndex = Int.random(in: 0..<bunch.count)
@@ -71,8 +69,6 @@ class Game {
                 hand[letter]! += 1
             }
             //update bunch
-            let letteridx = Int(letter.asciiValue! - 65)
-            bunchCounts[letteridx] -= 1
         }
         if 100 < bunch.count && bunch.count < 160 {
             numRows = 30
@@ -86,9 +82,34 @@ class Game {
     }
     
     
-//    func dump(letter:Character) -> {
-//        
-//    }
+    // place one tile in the player's hand back into the bunch and draw 3 random tiles from the bunch
+    func dump(letter:Character) -> [Character]{
+        if bunch.count < 3 {
+            return []
+        }
+        // randomly select 3 tiles to dump
+        var dumped:[Character] = []
+        for _ in 1...3 {
+            let randomIndex = Int.random(in: 0..<bunch.count)
+            let tile = bunch.remove(at: randomIndex)
+            dumped.append(tile)
+            if hand[tile] == nil {
+                hand[tile] = 1
+            } else {
+                hand[tile]! += 1
+            }
+        }
+        // discard the tile in your hand
+        if hand[letter]! - 1 == 0 {
+            hand.removeValue(forKey: letter)
+        } else {
+            hand[letter]! -= 1
+        }
+        bunch.append(letter)
+        // discard the letter selected by the player
+        return (dumped)
+        
+    }
     
     // if a player peels, see if they have a valid tile layout, if they do, draw a random letter from the bunch and place it in their hand
     // or set gameOver to true if no letters left to peel
@@ -107,9 +128,6 @@ class Game {
             } else {
                 hand[letter]! += 1
             }
-            //update bunch
-            let letteridx = Int(letter.asciiValue! - 65)
-            bunchCounts[letteridx] -= 1
             return true
         }
         return false
@@ -121,8 +139,6 @@ class Game {
         var visited = Array(repeating: Array(repeating: false, count: numRows), count: numRows)
         var count = 0
         checkPeelConditionsHelper(row: lastPlacedIndex.0, col: lastPlacedIndex.1, visited: &visited, count: &count)
-        print("count: \(count)")
-        print("tilesongrid: \(tilesOnGrid)")
         return count == tilesOnGrid
     }
     
@@ -138,7 +154,6 @@ class Game {
             // already visited this spot or this spot is nil, return
             return
         }
-        print("row: \(row) col: \(col)")
         // we are currently visiting this spot,
         visited[row][col] = true
         count += 1
@@ -166,7 +181,6 @@ class Game {
                 }
             }
         }
-        print("here")
         // recursive step, check all adjacent rows
         checkPeelConditionsHelper(row: row + 1, col: col, visited: &visited, count: &count)
         checkPeelConditionsHelper(row: row - 1, col: col, visited: &visited, count: &count)
