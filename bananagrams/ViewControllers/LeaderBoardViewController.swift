@@ -16,25 +16,55 @@ struct TimeEntry {
 }
 
 class CustomTableViewCell: UITableViewCell {
-    
+    let placeImageView = UIImageView()
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var cellLabelTime: UILabel!
     @IBOutlet weak var cellLabel: UILabel!
-    func configure(with entry: TimeEntry) {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        addSubview(placeImageView) // Add the placeImageView to the cell's view hierarchy
+        placeImageView.isHidden = false // Make sure it's not hidden
+        placeImageView.alpha = 1.0 // Make sure it's fully opaque
+        bringSubviewToFront(placeImageView)
+    }
+    
+    func configure(with entry: TimeEntry, index: Int) {
         let minutes = entry.time / 60
         let seconds = entry.time % 60
-        cellLabelTime?.text =  (String(format: "%02d:%02d", minutes, seconds))
+        cellLabelTime?.text =  "Time: " + (String(format: "%02d:%02d", minutes, seconds))
         cellLabel?.text = entry.username
         avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2 // Make the imageView round
         avatarImageView.clipsToBounds = true
         avatarImageView.contentMode = .scaleAspectFill // Maintain aspect ratio
+        if index == 0 {
+            placeImageView.image = UIImage(named: "firstplace")
+        } else if index == 1 {
+            placeImageView.image = UIImage(named: "secondplace")
+        } else if index == 2 {
+            placeImageView.image = UIImage(named: "thirdplace")
+        } else {
+            placeImageView.image = UIImage(named: "medal4th-10th")
+        }
+        
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         let imageViewSize = avatarImageView.frame.size
         let cellSize = contentView.frame.size
         avatarImageView.frame.origin.y = (cellSize.height - imageViewSize.height) / 2
+        
+        let cellPadding: CGFloat = 10 // You can adjust the padding as needed
+        let imageSize = CGSize(width: 60, height: 60) // Increase the width and height as needed
+
+        let imageX = bounds.minX + cellPadding // Use padding for x position
+        let imageY = (contentView.bounds.height - imageSize.height) / 2 // Center it vertically
+
+        placeImageView.frame = CGRect(x: imageX, y: imageY, width: imageSize.width, height: imageSize.height)
+        placeImageView.contentMode = .scaleAspectFit // Maintain aspect ratio
+        placeImageView.backgroundColor = .clear
+
     }
 }
 
@@ -112,8 +142,8 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
         // Get the corresponding TimeEntry from leaderboardEntries
         let timeEntry = leaderboardEntries[indexPath.row]
         
-        cell.configure(with: timeEntry)
-
+        cell.configure(with: timeEntry, index: indexPath.row)
+        cell.layoutIfNeeded()
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "username == %@", timeEntry.username)
         do {

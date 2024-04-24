@@ -751,14 +751,14 @@ keep peeling until there are no letters left!</string>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sa-KR-2eZ">
-                                                    <rect key="frame" x="20" y="65" width="181" height="21"/>
+                                                    <rect key="frame" x="101" y="53" width="181" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJ3-Pv-edS">
-                                                    <rect key="frame" x="20" y="11" width="210" height="27"/>
+                                                    <rect key="frame" x="8" y="0.0" width="210" height="27"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -788,7 +788,11 @@ keep peeling until there are no letters left!</string>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="BananaGrams_logo" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-v1-IGU">
-                                <rect key="frame" x="52" y="94" width="286" height="110"/>
+                                <rect key="frame" x="52" y="73" width="286" height="110"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="leaderboardPic" translatesAutoresizingMaskIntoConstraints="NO" id="DDa-0d-8Tc">
+                                <rect key="frame" x="148" y="191" width="87" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -813,6 +817,7 @@ keep peeling until there are no letters left!</string>
         <image name="BananaGrams_logo" width="286" height="110"/>
         <image name="chevron.down.square" catalog="system" width="128" height="114"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
+        <image name="leaderboardPic" width="1024" height="1024"/>
         <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="profile_icon" width="85.333335876464844" height="85.333335876464844"/>
@@ -820,7 +825,7 @@ keep peeling until there are no letters left!</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
