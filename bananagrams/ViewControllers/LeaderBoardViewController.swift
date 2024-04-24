@@ -7,21 +7,40 @@
 
 import UIKit
 import Firebase
+import CoreData
+
+
+struct TimeEntry {
+        var username: String
+        var time: Int32
+}
 
 class CustomTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var avatarImageView: UIImageView!
     
-    @IBOutlet weak var testLabel: UILabel!
-    
+    @IBOutlet weak var cellLabelTime: UILabel!
+    @IBOutlet weak var cellLabel: UILabel!
+    func configure(with entry: TimeEntry) {
+        let minutes = entry.time / 60
+        let seconds = entry.time % 60
+        cellLabelTime?.text =  (String(format: "%02d:%02d", minutes, seconds))
+        cellLabel?.text = entry.username
+        avatarImageView.layer.cornerRadius = avatarImageView.frame.height / 2 // Make the imageView round
+        avatarImageView.clipsToBounds = true
+        avatarImageView.contentMode = .scaleAspectFill // Maintain aspect ratio
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let imageViewSize = avatarImageView.frame.size
+        let cellSize = contentView.frame.size
+        avatarImageView.frame.origin.y = (cellSize.height - imageViewSize.height) / 2
+    }
 }
 
 
 
 class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    struct TimeEntry {
-            var username: String
-            var time: Int32
-    }
     var leaderboardEntries: [TimeEntry] = []
     var email: String?
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +49,9 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 100 
+        tableView.rowHeight = UITableView.automaticDimension
+        
         self.getStatistics()
     }
         // Do any additional setup after loading the view.
@@ -73,13 +95,16 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
             
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 180
+    }
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // Return the count of leaderboard entries
         return leaderboardEntries.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Dequeue a reusable cell of the correct type
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "LeaderBoardCellIdentifier", for: indexPath) as? CustomTableViewCell else {
             return UITableViewCell()
         }
@@ -87,12 +112,22 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
         // Get the corresponding TimeEntry from leaderboardEntries
         let timeEntry = leaderboardEntries[indexPath.row]
         
-        // Convert the time into minutes and seconds
-        let minutes = timeEntry.time / 60
-        let seconds = timeEntry.time % 60
-        
-        // Set the cell's label to show the username and time in a "MM:SS" format
-        cell.testLabel?.text = "\(timeEntry.username) -- \(String(format: "%02d:%02d", minutes, seconds))"
+        cell.configure(with: timeEntry)
+
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "username == %@", timeEntry.username)
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first, let avatarData = user.avatar {
+                cell.avatarImageView.image = UIImage(data: avatarData)
+            } else {
+                print("default avatar here")
+                cell.avatarImageView.image = UIImage(named: "defaultAvatar") // A default avatar if the user doesn't have one
+            }
+        } catch {
+            print("ERROR ACCESSING AVATAR")
+            cell.avatarImageView.image = UIImage(named: "defaultAvatar")
+        }
         
         return cell
     }
