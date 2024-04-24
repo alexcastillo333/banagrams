@@ -13,7 +13,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginid" id="BYZ-38-t0r" customClass="LoginViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,7 +298,7 @@
         <!--Home Screen View Controller-->
         <scene sceneID="zOe-QC-cMw">
             <objects>
-                <viewController id="zyc-48-JGg" customClass="HomeScreenViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homescreenid" id="zyc-48-JGg" customClass="HomeScreenViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NkW-qs-O4x">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -371,7 +371,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="Ykd-yd-UnO" kind="presentation" modalPresentationStyle="fullScreen" id="6tv-wM-jch"/>
+                                    <segue destination="Ykd-yd-UnO" kind="presentation" identifier="leaderboardSegueIdentifier" modalPresentationStyle="fullScreen" id="6tv-wM-jch"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -747,7 +747,7 @@ keep peeling until there are no letters left!</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJ3-Pv-edS">
-                                                    <rect key="frame" x="34" y="11" width="42" height="21"/>
+                                                    <rect key="frame" x="34" y="11" width="327" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
@@ -756,13 +756,26 @@ keep peeling until there are no letters left!</string>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="testLabel" destination="lJ3-Pv-edS" id="OoH-UC-Qar"/>
+                                            <outlet property="testLabel" destination="lJ3-Pv-edS" id="JGy-8O-kkm"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Nx-DK-U9r">
+                                <rect key="frame" x="16" y="52" width="75" height="34.333333333333485"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Back">
+                                    <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="21"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="zyc-48-JGg" kind="presentation" identifier="leaderboardToHomeSegueIdentifier" modalPresentationStyle="fullScreen" id="7qw-nV-3Va"/>
+                                </connections>
+                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" image="BananaGrams_logo" translatesAutoresizingMaskIntoConstraints="NO" id="xAD-v1-IGU">
-                                <rect key="frame" x="53" y="77" width="286" height="110"/>
+                                <rect key="frame" x="52" y="94" width="286" height="110"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                         </subviews>
@@ -771,7 +784,7 @@ keep peeling until there are no letters left!</string>
                     </view>
                     <navigationItem key="navigationItem" id="xMT-89-MbM"/>
                     <connections>
-                        <outlet property="tableView" destination="FGl-M0-lf1" id="5rP-CQ-Esh"/>
+                        <outlet property="tableView" destination="FGl-M0-lf1" id="Vyo-il-pmG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yxb-9s-3LJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -780,9 +793,8 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VIf-Ie-18z"/>
-        <segue reference="hJr-mZ-wPS"/>
-        <segue reference="COG-wT-k3U"/>
+        <segue reference="7qw-nV-3Va"/>
+        <segue reference="oWq-cm-3eB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="BananaGrams_logo" width="286" height="110"/>

@@ -82,6 +82,11 @@ class HomeScreenViewController: UIViewController {
                 nextVC.email = email
             }
         }
+        if segue.identifier == "leaderboardSegueIdentifier" {
+            if let nextVC = segue.destination as? LeaderBoardViewController {
+                nextVC.email = email
+            }
+        }
     }
      
     
