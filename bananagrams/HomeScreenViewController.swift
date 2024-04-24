@@ -33,6 +33,21 @@ class HomeScreenViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                AudioManager.shared.toggleMusic(user.musicOn)
+            }
+        } catch {
+            print("Error fetching music settings: \(error.localizedDescription)")
+        }
+    }
+    
     func retrieveUsers() -> [NSManagedObject] {
         // retrieve all objects that meet criteria
         

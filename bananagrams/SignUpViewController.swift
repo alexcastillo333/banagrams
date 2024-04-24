@@ -61,6 +61,13 @@ class SignUpViewController: UIViewController {
         userStored.setValue(username, forKey: "username")
         userStored.setValue(email, forKey:"email")
         userStored.setValue("theme1", forKey:"colors")
+        userStored.setValue(Int32.max, forKey:"time1")
+        userStored.setValue(Int32.max, forKey:"time2")
+        userStored.setValue(Int32.max, forKey:"time3")
+        userStored.setValue(Int32.max, forKey:"time4")
+        userStored.setValue(Int32.max, forKey:"time5")
+        userStored.setValue(false, forKey: "musicOn")
+        userStored.setValue(false, forKey: "soundEffectsOn")
         // Set other attributes as needed
         do {
             try contextSignUp.save()

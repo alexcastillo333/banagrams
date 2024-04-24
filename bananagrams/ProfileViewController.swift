@@ -9,14 +9,19 @@ import UIKit
 import FirebaseAuth
 import CoreData
 
-class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var tableView: UITableView!
     var username: String?
     var email: String?
+    var topTimes: [Int32] = []
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         playerNameLabel.text = username
         loadAvatarImage()
     }
@@ -25,8 +30,26 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         super.viewWillAppear(animated)
         playerNameLabel.text = username
         loadAvatarImage()
+        fetchTopTimes()
+        tableView.reloadData()
     }
-
+    
+    func fetchTopTimes() {
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                let times = [user.time1, user.time2, user.time3, user.time4, user.time5]
+                // Filter out Int32.max values and sort the remaining times
+                topTimes = times.filter { $0 != Int32.max }.sorted()
+                tableView.reloadData()  // Assuming 'tableView' is your UITableView's outlet
+            }
+        } catch let error as NSError {
+            print("Could not fetch times: \(error), \(error.userInfo)")
+        }
+    }
     
     func loadAvatarImage() {
         guard let email = email else {
@@ -100,6 +123,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         
         let okAction = UIAlertAction(title: "OK", style: .default) { _ in
             do {
+                AudioManager.shared.toggleMusic(false)
                 try Auth.auth().signOut()
                 self.performSegue(withIdentifier: "logoutSegueIdentifier", sender: self)
             } catch {
@@ -115,15 +139,32 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         present(controller, animated: true)
         
     }
-    @IBAction func signOutButtonPressed(_ sender: Any) {
-        do {
-            try Auth.auth().signOut()
-            performSegue(withIdentifier: "signOutSegue", sender: self)
-        } catch {
-            print("ERROR LOGGING OUT")
-        }
+//    @IBAction func signOutButtonPressed(_ sender: Any) {
+//        
+//        do {
+//            
+//            try Auth.auth().signOut()
+//            performSegue(withIdentifier: "signOutSegue", sender: self)
+//        } catch {
+//            print("ERROR LOGGING OUT")
+//        }
+//    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return topTimes.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TimeCellIdentifier", for: indexPath)
         
+        let timeInSeconds = topTimes[indexPath.row]
+        let minutes = timeInSeconds / 60
+        let seconds = timeInSeconds % 60
         
+        // Format the time as MM:SS
+        cell.textLabel?.text = String(format: "%02d:%02d", minutes, seconds)
+        
+        return cell
     }
   
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

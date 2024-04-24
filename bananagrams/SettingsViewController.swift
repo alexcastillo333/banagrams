@@ -34,21 +34,40 @@ class AudioManager {
     }
     
     func toggleMusic(_ shouldPlay: Bool) {
-        if shouldPlay {
-            audioPlayer?.play()
+        print("toggleMusic called with \(shouldPlay)")
+        if let player = audioPlayer {
+            if shouldPlay {
+                audioPlayer?.play()
+            } else {
+                audioPlayer?.pause()
+            }
         } else {
-            audioPlayer?.pause()
+            print("Audio player is nil")
         }
     }
 }
 class SettingsViewController: UIViewController {
     @IBOutlet weak var musicSwitch: UISwitch!
     @IBOutlet weak var colorThemeButton: UIButton!
+    @IBOutlet weak var soundFXSwitch: UISwitch!
     var email: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        musicSwitch.isOn = AudioManager.shared.audioPlayer?.isPlaying ?? false
         setupColorThemeDropdown()
+        
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                musicSwitch.isOn = user.musicOn
+                soundFXSwitch.isOn = user.soundEffectsOn
+                AudioManager.shared.toggleMusic(user.musicOn)
+            }
+        } catch {
+            print("Error fetching user settings: \(error.localizedDescription)")
+        }
         
         
         // Do any additional setup after loading the view.
@@ -93,12 +112,37 @@ class SettingsViewController: UIViewController {
     
     @IBAction func soundEffectsSwitchFlipped(_ sender: UISwitch) {
         UserDefaults.standard.set(sender.isOn, forKey: "SoundEffectsEnabled")
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                user.soundEffectsOn = sender.isOn
+                try context.save()
+                print("Sound effect changed")
+            }
+        } catch {
+            print("ERROR CHANGING SOUND FX")
+        }
         
     }
     
 
     @IBAction func musicSwitchFlipped(_ sender: UISwitch) {
         AudioManager.shared.toggleMusic(sender.isOn)
-        print("Sound effects setting changed: \(sender.isOn)")
+        // Update CoreData
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+        
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                user.musicOn = sender.isOn
+                try context.save()
+                print("Music setting updated: \(sender.isOn)")
+            }
+        } catch {
+            print("Error updating music setting: \(error.localizedDescription)")
+        }
     }
 }
