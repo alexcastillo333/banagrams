@@ -36,7 +36,7 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
 
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot {
-                    childList.append(childSnapshot)
+                    self.childList.append(childSnapshot)
                 } else {
                     continue
                 }
@@ -59,14 +59,12 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
             // Access the user data as needed
             let username = userData["username"] as? String ?? ""
             let email = userData["email"] as? String ?? ""
-            let time = userData["time"] as? Int ?? Int32.max
+            let time = userData["time"] as? Int ?? 10000000
             cell.testLabel?.text = "\(username) -- \(email) -- \(time)"
             // Do something with the user data
             print("Username: (username), Email: (email), Age: (age)")
         }
-      }
-        
-        
+      
         return cell
     }
     

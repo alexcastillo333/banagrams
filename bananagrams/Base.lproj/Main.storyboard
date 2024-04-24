@@ -370,6 +370,9 @@
                                     <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="18"/>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <segue destination="Ykd-yd-UnO" kind="presentation" modalPresentationStyle="fullScreen" id="6tv-wM-jch"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OPI-E3-Ugn"/>
@@ -777,6 +780,7 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="VIf-Ie-18z"/>
         <segue reference="hJr-mZ-wPS"/>
         <segue reference="COG-wT-k3U"/>
     </inferredMetricsTieBreakers>
