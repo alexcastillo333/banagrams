@@ -108,6 +108,18 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         saveTimeToCoreData()
+        
+//        ref.child(username).setValue([
+//            "username": username,
+//            "email": email,
+//            "request": uid
+//        ]) { (error, ref) in
+//            if let error = error {
+//                print("Data could not be saved: \(error.localizedDescription)")
+//            } else {
+//                print("Data saved successfully")
+//            }
+//        }
     }
     
     func saveTimeToCoreData() {
