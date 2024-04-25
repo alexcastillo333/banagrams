@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="OJ3-dr-YJO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
@@ -213,8 +213,8 @@
                                     <action selector="signUpButtonPressed:" destination="Nu3-uT-Lnp" eventType="touchUpInside" id="B56-69-UCp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Best Score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5P-so-Woa">
-                                <rect key="frame" x="155" y="372" width="83" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top 5 Best Times For Default Deck" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5P-so-Woa">
+                                <rect key="frame" x="66" y="372" width="264" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -238,6 +238,16 @@
                                 <rect key="frame" x="-2" y="436" width="395" height="382"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TimeCellIdentifier" id="jIF-6V-fgS">
+                                        <rect key="frame" x="0.0" y="50" width="395" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="jIF-6V-fgS" id="sV3-yE-Pah">
+                                            <rect key="frame" x="0.0" y="0.0" width="395" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHx-Tx-h74">
                                 <rect key="frame" x="23" y="70" width="75" height="39"/>
@@ -277,6 +287,7 @@
                     <connections>
                         <outlet property="imageView" destination="9DF-a8-l1L" id="7hz-UY-DDw"/>
                         <outlet property="playerNameLabel" destination="IvM-Gr-s7V" id="AER-cO-7yJ"/>
+                        <outlet property="tableView" destination="lmF-fh-Axe" id="oWw-UZ-doh"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="logoutSegueIdentifier" modalPresentationStyle="fullScreen" id="COG-wT-k3U"/>
                     </connections>
                 </viewController>
@@ -306,7 +317,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="OJ3-dr-YJO" kind="presentation" modalPresentationStyle="fullScreen" id="KzT-1t-2dt"/>
+                                    <segue destination="OJ3-dr-YJO" kind="presentation" identifier="gameSegueIdentifier" modalPresentationStyle="fullScreen" id="KzT-1t-2dt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ut3-f2-dZK">
@@ -331,7 +342,7 @@
                                     <color key="baseForegroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="VWf-Nu-HBr" kind="show" id="8uK-j8-vKQ"/>
+                                    <segue destination="VWf-Nu-HBr" kind="show" identifier="settingsSegueIdentifier" id="8uK-j8-vKQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ojh-7K-ZXE">
@@ -389,14 +400,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="14w-3w-WDT">
-                                <rect key="frame" x="72" y="411" width="49" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="onTintColor" systemColor="systemBrownColor"/>
-                                <connections>
-                                    <action selector="darkModeSwitchFlipped:" destination="VWf-Nu-HBr" eventType="valueChanged" id="fPj-lu-LrP"/>
-                                </connections>
-                            </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SNp-Gp-7sB">
                                 <rect key="frame" x="72" y="487" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -413,13 +416,6 @@
                                     <action selector="musicSwitchFlipped:" destination="VWf-Nu-HBr" eventType="valueChanged" id="9lX-EU-5lY"/>
                                 </connections>
                             </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark mode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF5-mW-z2C">
-                                <rect key="frame" x="175" y="416" width="112" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sound FX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="goJ-ea-RpK">
                                 <rect key="frame" x="175" y="492" width="95" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -434,14 +430,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9c0-g1-qc2" customClass="SoundButton" customModule="bananagrams" customModuleProvider="target">
-                                <rect key="frame" x="139" y="685" width="75" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ya4-gE-aUg">
+                                <rect key="frame" x="71" y="392" width="250" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                                <connections>
-                                    <action selector="randomButtonPressed:" destination="VWf-Nu-HBr" eventType="touchUpInside" id="ITK-lk-vfE"/>
-                                </connections>
+                                <buttonConfiguration key="configuration" style="filled" title="Change Game Color Scheme">
+                                    <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="18"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="9b9-wB-INL"/>
@@ -449,8 +446,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="q4h-cA-vUy"/>
                     <connections>
+                        <outlet property="colorThemeButton" destination="Ya4-gE-aUg" id="GyG-xc-iwh"/>
                         <outlet property="musicSwitch" destination="G9D-2l-RK6" id="vwy-gq-Bz9"/>
-                        <outlet property="randomButton" destination="9c0-g1-qc2" id="tzZ-xJ-HHe"/>
+                        <outlet property="soundFXSwitch" destination="SNp-Gp-7sB" id="32y-Pi-NvR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cde-uf-fFd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

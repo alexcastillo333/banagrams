@@ -196,6 +196,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2BCDC44B2BD8AB7E0098872D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */,
+				B8E1AA762B9A63400046E257 /* Assets.xcassets */,
+				B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */,
+				B8869E142BCDA9FB008F30AE /* defaultAvatar.png */,
+				B8579EB42BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 */,
+				B8579EB82BBDF2B800DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		2BCDC44C2BD8AB850098872D /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */,
+				B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */,
+				B8E1AA6E2B9A63370046E257 /* ViewController.swift */,
+				B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */,
+				848F27322BA806B500A413F4 /* InstructionsViewController.swift */,
+				B8824EC22BA6F14300F534D2 /* SignUpViewController.swift */,
+				B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */,
+				2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		2BCDC44D2BD8AB8C0098872D /* GameLogic */ = {
+			isa = PBXGroup;
+			children = (
+				84599CD82BC336B8009EF4FF /* Game.swift */,
+				84535D012BC5DA1800D9D0C6 /* ValidWords.swift */,
+			);
+			path = GameLogic;
+			sourceTree = "<group>";
+		};
+		2BCDC44E2BD8AB940098872D /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				84E2BDF12BB56426006D3A2B /* Tile.swift */,
+				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
+				84535D032BC5E83B00D9D0C6 /* HandCell.swift */,
+				84A4B8F12BC34A7100AA4159 /* GridCell.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		B8824EC42BA6F78D00F534D2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,34 +271,18 @@
 		B8E1AA692B9A63370046E257 /* bananagrams */ = {
 			isa = PBXGroup;
 			children = (
+				2BCDC44E2BD8AB940098872D /* Components */,
+				2BCDC44D2BD8AB8C0098872D /* GameLogic */,
+				2BCDC44C2BD8AB850098872D /* ViewControllers */,
+				2BCDC44B2BD8AB7E0098872D /* Assets */,
 				B8824EBF2BA6E49D00F534D2 /* bananagrams.entitlements */,
-				84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */,
-				84535D012BC5DA1800D9D0C6 /* ValidWords.swift */,
 				B8E1AA6A2B9A63370046E257 /* AppDelegate.swift */,
 				B8E1AA6C2B9A63370046E257 /* SceneDelegate.swift */,
-				B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */,
-				B8E1AA6E2B9A63370046E257 /* ViewController.swift */,
 				B8E1AA702B9A63380046E257 /* Main.storyboard */,
-				84535D032BC5E83B00D9D0C6 /* HandCell.swift */,
-				84A4B8F12BC34A7100AA4159 /* GridCell.swift */,
-				B8869E142BCDA9FB008F30AE /* defaultAvatar.png */,
-				84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */,
-				B8579EB82BBDF2B800DFCDCC /* monkey sound effect-[AudioTrimmer.com].mp3 */,
-				84E2BDF12BB56426006D3A2B /* Tile.swift */,
-				84599CD82BC336B8009EF4FF /* Game.swift */,
-				2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */,
-				B8579EB42BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 */,
-				B8E1AA762B9A63400046E257 /* Assets.xcassets */,
 				B8E1AA782B9A63400046E257 /* LaunchScreen.storyboard */,
 				B8E1AA732B9A63380046E257 /* bananagrams.xcdatamodeld */,
-				B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */,
 				B8824EC02BA6E55D00F534D2 /* GoogleService-Info.plist */,
-				848F27322BA806B500A413F4 /* InstructionsViewController.swift */,
-				B8824EC22BA6F14300F534D2 /* SignUpViewController.swift */,
 				B8E575212BA70473006C87FF /* Info.plist */,
-				B87C18662BB6A333000AF925 /* HomeScreenViewController.swift */,
-				B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */,
-				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
 			);
 			path = bananagrams;
 			sourceTree = "<group>";

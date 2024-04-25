@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 // Screen for the gameplay
 class GameViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIScrollViewDelegate {
@@ -15,6 +16,15 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var gameBoard: UICollectionView!
     // the collectionview representing the hand
     @IBOutlet weak var gameHand: UICollectionView!
+    
+    
+    
+    // count the time until the game ends
+    var timer:UILabel!
+    // numner of seconds that have passed
+    var time = 0
+    // queue for updating timer
+    var queue: DispatchQueue!
     // this contains the data sources for the gameBoard and methods for manipulating them
     var game:Game!
     // the width and height of the gameBoard cells on the screen
@@ -26,12 +36,18 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // cell identifier for the hand collectionView cells
     let handCellid = "handCell"
     
+    // email used to load correct color theme
+    var email: String?
     
-
+  
+    
     // set up the screen, (scrollview is needed for horizontal scrolling of the gameBoard)
     override func viewDidLoad() {
         super.viewDidLoad()
-        game = Game()
+        var array = Array(repeating: 0, count: 26)
+        array[0] = 2
+        game = Game(deckSpec: array)
+        // game = game()
         let handHeight = self.view.frame.height / 5
         
         let boardBounds = CGRect(x: 0, y: 0, width: game.numRows * gridCellWidth, height: game.numRows * gridCellWidth)
@@ -61,11 +77,73 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         peelButton.isHidden = true
         gameHand.allowsSelection = true
         gameHand.allowsMultipleSelection = false
+        
+        
+        // make the timer
+        let timerSize = CGSize(width: 90.0, height: 40.0)
+        let timerOrigin = CGPoint(x: (self.view.frame.width - 90) / 2, y: 60)
+        timer = UILabel(frame: CGRect(origin: timerOrigin, size: timerSize))
+        timer.backgroundColor = UIColor.black
+        timer.layer.cornerRadius = 10
+        timer.textColor = UIColor.white
+        timer.textAlignment = .center
+        self.view.addSubview(timer)
+        self.view.bringSubviewToFront(timer)
+        queue = DispatchQueue(label: "myQueue", qos: .userInitiated)
         // for detecting shaking
         becomeFirstResponder()
     }
     
-
+    
+    func timerStart() {
+        while !game.gameOver {
+            
+            usleep(1000000)
+            self.time += 1
+            DispatchQueue.main.async {
+                let minutes = self.time / 60
+                let seconds = self.time % 60
+                let timeString = String(format: "%02d:%02d", minutes, seconds)
+                self.timer.text = timeString
+            }
+        }
+        saveTimeToCoreData()
+    }
+    
+    func saveTimeToCoreData() {
+        
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                var times = [user.time1, user.time2, user.time3, user.time4, user.time5]
+                        
+                // Add the new time and sort the array
+                times.append(Int32(self.time))
+                times.sort()
+                
+                times = Array(times.prefix(5))
+                
+                user.time1 = times.count > 0 ? times[0] : Int32.max
+                user.time2 = times.count > 1 ? times[1] : Int32.max
+                user.time3 = times.count > 2 ? times[2] : Int32.max
+                user.time4 = times.count > 3 ? times[3] : Int32.max
+                user.time5 = times.count > 4 ? times[4] : Int32.max
+                print("below is usertime")
+                print(user.time1)
+                print(user.time2)
+        
+                try context.save()
+                
+                
+            }
+        } catch {
+            print("ERROR SAVING TIME")
+        }
+            
+        
+    }
     
     // allow this screen to recognize motion
     override var canBecomeFirstResponder: Bool {
@@ -73,15 +151,79 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     
+    // shake to dump
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
-            print(gameHand.indexPathsForSelectedItems)
-            if !self.gameHand.indexPathsForSelectedItems!.isEmpty {
-                let idx = self.gameHand.indexPathsForSelectedItems![0]
-                let keys = Array(game.hand.keys).sorted()
-                let key = keys[idx.item]
-                print("dumping")
+            // can only dump when at least 3 tiles are in the bunch
+            if self.game.bunch.count > 3 {
+                if !self.gameHand.indexPathsForSelectedItems!.isEmpty {
+                    let idx = self.gameHand.indexPathsForSelectedItems![0]
+                    let lettersInHand = Array(game.hand.keys).sorted()
+                    let letterToDump = lettersInHand[idx.item]
+                    UIView.animate(withDuration: 1.0,
+                                   animations: { let dumpee = self.gameHand.cellForItem(at: idx) as! HandCell
+                        
+                        dumpee.center.y += self.gameHand.frame.height
+                        dumpee.transform = dumpee.transform.rotated(by: CGFloat(Double.pi) * 3)
+                                                },
+                                   completion: {_ in
+                        let newTiles = self.game.dump(letter: letterToDump)
+                        self.gameBoard.reloadData()
+                        self.gameHand.reloadData()
+                        self.peelButton.isHidden = !self.game.hand.isEmpty
+                    }
+                    )
+                }
             }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyColorScheme()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        timer.text = "0:00"
+        queue.async {
+            self.timerStart()
+        }
+    }
+    
+    func applyColorScheme() {
+        guard let email = email else {
+            print("Email is nil")
+            return
+        }
+
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                print("User found: \(user.username ?? "[username not available]")")
+                if let theme = user.colors {
+                    switch theme {
+                    case "theme1":
+                        let primaryColor = UIColor(red: 255/255, green: 235/255, blue: 205/255, alpha: 1.0) // An approximation to light beige
+                        let secondaryColor = UIColor(red: 210/255, green: 180/255, blue: 140/255, alpha: 1.0) // A darker beige or tan color
+                        gameBoard.backgroundColor = primaryColor
+                        gameHand.backgroundColor = secondaryColor
+                    case "theme2":
+                        gameBoard.backgroundColor = UIColor.white
+                        gameHand.backgroundColor = UIColor.black
+                    case "theme3":
+                        gameBoard.backgroundColor = UIColor.systemPink
+                        gameHand.backgroundColor = UIColor.systemPurple
+                    default:
+                        break
+                    }
+                }
+            }
+        } catch {
+            print("ERROR LOADING COLORS: \(error.localizedDescription)")
         }
     }
     
@@ -109,7 +251,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                     self.game.handToGrid(letter: letter, row: row, col: col)
                     self.gameHand.reloadData()
                     collectionView.reloadData()
-                    print(self.gameHand.indexPathsForSelectedItems!.count)
+                    self.peelButton.isHidden = !self.game.hand.isEmpty
+
                 }
                 }
             // dragging from grid, dropping on grid
@@ -140,10 +283,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                         let col = sourceIndexPath.item
                         let letter = Character(String(letterString))
                         self.game.gridtoHand(letter: letter, row: row, col: col)
-                        self.peelButton.isHidden = !self.game.hand.isEmpty
                         self.gameBoard.allowsSelection = false
                         self.gameBoard.reloadData()
                         self.gameHand.reloadData()
+                        self.peelButton.isHidden = !self.game.hand.isEmpty
                     }
                 }
            }
@@ -310,4 +453,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         return gameBoard.dequeueReusableCell(withReuseIdentifier: gridCellid, for: indexPath)
     }
+    
+    
+    
 }
