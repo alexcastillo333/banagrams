@@ -7,9 +7,8 @@
 
 import UIKit
 import AVFoundation
-var audioPlayerSX: AVAudioPlayer?
 class SoundButton: UIButton {
-    
+    private var audioPlayer: AVAudioPlayer?
     // Override the method to play sound effect
     override func sendAction(_ action: Selector, to target: Any?, for event: UIEvent?) {
         super.sendAction(action, to: target, for: event)

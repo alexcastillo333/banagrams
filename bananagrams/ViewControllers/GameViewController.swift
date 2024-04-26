@@ -330,19 +330,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
        return true
    }
     
-    func playSoundEffect(named fileName: String) {
-        guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
-            print("Unable to locate sound effect file.")
-            return
-        }
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-            audioPlayer?.play()
-        } catch {
-            print("SoundEffectPlayer error: \(error.localizedDescription)")
-        }
-    }
-    
     @IBAction func peelButtonPressed(_ sender: Any) {
         let outcome = self.game.peel()
         totalPeels += 1
@@ -351,7 +338,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             peelFails += 1
             print("play peel failed sound effect")
         } else if outcome == "win" {
-            playSoundEffect(named: "monkey sound effect-[AudioTrimmer.com]")
             print("you win")
             self.peelButton.isHidden = true
             self.timer.isHidden = true

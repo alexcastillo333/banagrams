@@ -14,8 +14,8 @@
             filePath = "bananagrams/ViewControllers/GameViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "555"
-            endingLineNumber = "555"
+            startingLineNumber = "541"
+            endingLineNumber = "541"
             landmarkName = "gameEndPopup()"
             landmarkType = "7">
          </BreakpointContent>
