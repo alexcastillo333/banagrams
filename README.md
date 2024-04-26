@@ -11,16 +11,19 @@ Contributions:
       - Logout Page
       - Saved Username per user
       - Sound effect and music
+      - Edited audios
     Alex Castillo (25%)
       - Instruction Description Page
       - drag and drop functionality of tiles on the grid
       - game class
+      - gameplay
     Aaron Posadas (25%)
       - Profile Page
       - Custom Bananagrams Logo
       - Refactored segues
-      - Edited audios
-      - Gameplay
+      - Multiplayer functionality
+      - gameplay
+    
 
 Deviations: 
  - Issues with Firebase Package dependencies made it extremely difficult to compile the project and test the alpha.\
