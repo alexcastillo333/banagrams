@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */; };
+		2B4AA92E2BDB6C3A00B68986 /* LobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AA92D2BDB6C3A00B68986 /* LobbyCell.swift */; };
+		2B4AA9302BDB753100B68986 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AA92F2BDB753100B68986 /* Lobby.swift */; };
 		2B96B7882BDB31F100AB1C1E /* MultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B7872BDB31F100AB1C1E /* MultiplayerViewController.swift */; };
 		2B96B78A2BDB31FC00AB1C1E /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B7892BDB31FC00AB1C1E /* LobbyViewController.swift */; };
 		2B96B78B2BDB46E700AB1C1E /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8529AF32BD8B17E00A94EF4 /* LeaderBoardViewController.swift */; };
@@ -103,6 +105,8 @@
 
 /* Begin PBXFileReference section */
 		2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		2B4AA92D2BDB6C3A00B68986 /* LobbyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyCell.swift; sourceTree = "<group>"; };
+		2B4AA92F2BDB753100B68986 /* Lobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lobby.swift; sourceTree = "<group>"; };
 		2B96B7872BDB31F100AB1C1E /* MultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerViewController.swift; sourceTree = "<group>"; };
 		2B96B7892BDB31FC00AB1C1E /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
 		84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrabble_words.txt; sourceTree = "<group>"; };
@@ -250,6 +254,7 @@
 			children = (
 				84599CD82BC336B8009EF4FF /* Game.swift */,
 				84535D012BC5DA1800D9D0C6 /* ValidWords.swift */,
+				2B4AA92F2BDB753100B68986 /* Lobby.swift */,
 			);
 			path = GameLogic;
 			sourceTree = "<group>";
@@ -261,6 +266,7 @@
 				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
 				84535D032BC5E83B00D9D0C6 /* HandCell.swift */,
 				84A4B8F12BC34A7100AA4159 /* GridCell.swift */,
+				2B4AA92D2BDB6C3A00B68986 /* LobbyCell.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -471,7 +477,9 @@
 				84E2BDF22BB56426006D3A2B /* Tile.swift in Sources */,
 				2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */,
 				B8E1AA752B9A63380046E257 /* bananagrams.xcdatamodeld in Sources */,
+				2B4AA9302BDB753100B68986 /* Lobby.swift in Sources */,
 				B8579EB32BBDDFDC00DFCDCC /* SettingsViewController.swift in Sources */,
+				2B4AA92E2BDB6C3A00B68986 /* LobbyCell.swift in Sources */,
 				84A4B8F22BC34A7100AA4159 /* GridCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
