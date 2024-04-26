@@ -53,7 +53,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="Nu3-uT-Lnp" kind="show" id="HgX-cW-JRb"/>
+                                    <segue destination="Nu3-uT-Lnp" kind="presentation" modalPresentationStyle="fullScreen" id="HgX-cW-JRb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-fa-gbs">
@@ -99,7 +99,7 @@
             <objects>
                 <viewController id="Nu3-uT-Lnp" customClass="SignUpViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ewg-N9-H81">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xa7-5B-yRS">
@@ -186,6 +186,7 @@
                         <outlet property="emailTextField" destination="17x-Vc-HkV" id="XTZ-Pp-kB6"/>
                         <outlet property="passwordTextField" destination="rT2-G3-DSO" id="gJC-WP-uVF"/>
                         <outlet property="usernameTextField" destination="xa7-5B-yRS" id="A4s-Iy-p7k"/>
+                        <segue destination="zyc-48-JGg" kind="presentation" identifier="toHomeSegueIdentifier" modalPresentationStyle="fullScreen" id="bXr-i1-10o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMP-AQ-M9B" sceneMemberID="firstResponder"/>
@@ -858,8 +859,8 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="sXn-g0-E8l"/>
-        <segue reference="COG-wT-k3U"/>
+        <segue reference="bXr-i1-10o"/>
+        <segue reference="oWq-cm-3eB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="BananaGrams_logo" width="286" height="110"/>

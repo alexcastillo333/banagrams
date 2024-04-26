@@ -80,6 +80,7 @@ class HomeScreenViewController: UIViewController {
         if segue.identifier == "gameSegueIdentifier" {
             if let nextVC = segue.destination as? GameViewController {
                 nextVC.email = email
+                nextVC.username = username
             }
         }
         if segue.identifier == "leaderboardSegueIdentifier" {

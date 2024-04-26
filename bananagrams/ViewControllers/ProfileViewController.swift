@@ -8,16 +8,19 @@
 import UIKit
 import FirebaseAuth
 import CoreData
+import Firebase
+import FirebaseStorage
 
 class ProfileViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
     var username: String?
     var email: String?
-    var topTimes: [Int32] = []
+    var topTimes: [Int] = []
     @IBOutlet weak var playerNameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let ref = Database.database().reference().child("bananagrams")
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -35,51 +38,45 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
     }
     
     func fetchTopTimes() {
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
-        
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let user = results.first {
-                let times = [user.time1, user.time2, user.time3, user.time4, user.time5]
-                // Filter out Int32.max values and sort the remaining times
-                topTimes = times.filter { $0 != Int32.max }.sorted()
-                tableView.reloadData()
+        ref.child(username!).observeSingleEvent(of: .value, with: { snapshot in
+            guard let userData = snapshot.value as? [String: Any],
+                  let username = userData["username"] as? String,
+                  var times = userData["bestTimes"] as? [Int] else {
+                return
             }
-        } catch let error as NSError {
-            print("Could not fetch times: \(error), \(error.userInfo)")
-        }
+            self.topTimes = times.filter { $0 != Int.max }.sorted()
+                self.tableView.reloadData()
+            })
     }
     
     func loadAvatarImage() {
-        guard let email = email else {
-            print("Email is nil")
-            imageView.image = UIImage(named: "defaultAvatar")
-            return
-        }
-
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
-
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let user = results.first {
-                print("User found: \(user.username ?? "[username not available]")")
-                if let avatarData = user.avatar {
-                    imageView.image = UIImage(data: avatarData)
-                    print("Loaded user's avatar image")
-                } else {
-                    print("User's avatar image is nil, loading default")
-                    imageView.image = UIImage(named: "defaultAvatar")
+        ref.child(username!).observeSingleEvent(of: .value, with: { snapshot in
+            guard let userData = snapshot.value as? [String: Any],
+                  let avatarURLString = userData["avatar"] as? String,
+                  let url = URL(string: avatarURLString) else {
+                DispatchQueue.main.async {
+                    print("User data is missing or avatar URL is not available.")
+                    self.imageView.image = UIImage(named: "defaultAvatar")
                 }
-            } else {
-                print("No user found with username \(username), loading default")
-                imageView.image = UIImage(named: "defaultAvatar")
+                return
             }
-        } catch {
-            print("ERROR LOADING IMAGE: \(error.localizedDescription)")
-        }
+            
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard let data = data, error == nil else {
+                    DispatchQueue.main.async {
+                        print("Failed to load the avatar image, setting to default")
+                        self.imageView.image = UIImage(named: "defaultAvatar")
+                    }
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.imageView.image = UIImage(data: data)
+                }
+            }.resume()
+        })
     }
+
 
     
     @IBAction func setAvatarButtonClicked(_ sender: Any) {
@@ -97,22 +94,71 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
             dismiss(animated: true, completion: nil)
     }
     
+//    func saveAvatarImage(_ image: UIImage) {
+//            let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+//            fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+//            
+//            do {
+//                let results = try context.fetch(fetchRequest)
+//                if let user = results.first {
+//                    if let imageData = image.pngData() { 
+//                        user.avatar = imageData
+//                        try context.save()
+//                    }
+//                }
+//            } catch {
+//                print("ERROR SAVING IMAGE")
+//            }
+//        }
     func saveAvatarImage(_ image: UIImage) {
-            let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
+            guard let imageData = image.jpegData(compressionQuality: 0.75) else {
+                print("Could not get JPEG representation of UIImage")
+                return
+            }
             
-            do {
-                let results = try context.fetch(fetchRequest)
-                if let user = results.first {
-                    if let imageData = image.pngData() { 
-                        user.avatar = imageData
-                        try context.save()
+            let storageRef = Storage.storage().reference()
+            let avatarRef = storageRef.child("avatars/\(username!).jpg")
+
+            avatarRef.putData(imageData, metadata: nil) { metadata, error in
+                if let error = error {
+                    print("Error uploading image: \(error.localizedDescription)")
+                    return
+                }
+                
+                avatarRef.downloadURL { url, error in
+                    guard let downloadURL = url else {
+                        print("Could not get download URL")
+                        return
+                    }
+                    
+                    self.ref.child(self.username!).updateChildValues(["avatar": downloadURL.absoluteString]) { error, _ in
+                        if let error = error {
+                            print("Error updating avatar URL: \(error.localizedDescription)")
+                        } else {
+                            print("Avatar URL updated successfully")
+                        }
                     }
                 }
-            } catch {
-                print("ERROR SAVING IMAGE")
             }
         }
+
+
+//    2. Update Firebase Realtime Database
+//    Here's the helper method to update the user's avatar URL in Firebase Realtime Database:
+//
+//    swift
+//    Copy code
+    func updateAvatarURLInDatabase(email: String, url: String) {
+        // Locate the user by email and update the avatar URL
+        ref.child("users").queryOrdered(byChild: "email").queryEqual(toValue: email).observeSingleEvent(of: .value, with: { snapshot in
+            if let userSnapshot = snapshot.children.allObjects.first as? DataSnapshot {
+                userSnapshot.ref.updateChildValues(["avatar": url])
+                print("Avatar URL updated successfully")
+            } else {
+                print("User not found or avatar URL is missing for email: \(email)")
+            }
+        })
+    }
     
     @IBAction func logoutButtonPressed(_ sender: Any) {
         
