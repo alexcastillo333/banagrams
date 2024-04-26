@@ -53,7 +53,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="Nu3-uT-Lnp" kind="show" id="HgX-cW-JRb"/>
+                                    <segue destination="Nu3-uT-Lnp" kind="presentation" modalPresentationStyle="fullScreen" id="HgX-cW-JRb"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kpr-fa-gbs">
@@ -99,7 +99,7 @@
             <objects>
                 <viewController id="Nu3-uT-Lnp" customClass="SignUpViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ewg-N9-H81">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xa7-5B-yRS">
@@ -186,6 +186,7 @@
                         <outlet property="emailTextField" destination="17x-Vc-HkV" id="XTZ-Pp-kB6"/>
                         <outlet property="passwordTextField" destination="rT2-G3-DSO" id="gJC-WP-uVF"/>
                         <outlet property="usernameTextField" destination="xa7-5B-yRS" id="A4s-Iy-p7k"/>
+                        <segue destination="zyc-48-JGg" kind="presentation" identifier="toHomeSegueIdentifier" modalPresentationStyle="fullScreen" id="bXr-i1-10o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dMP-AQ-M9B" sceneMemberID="firstResponder"/>
@@ -317,7 +318,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="OJ3-dr-YJO" kind="presentation" identifier="gameSegueIdentifier" modalPresentationStyle="fullScreen" id="KzT-1t-2dt"/>
+                                    <segue destination="G2T-dH-dwP" kind="show" identifier="newGameSegueIdentifier" id="Hmg-VU-IOQ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ut3-f2-dZK">
@@ -330,7 +331,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="JLM-9h-ssp" kind="presentation" modalPresentationStyle="fullScreen" id="mp5-eV-t6P"/>
+                                    <segue destination="JLM-9h-ssp" kind="show" id="mp5-eV-t6P"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOi-ly-ZtF">
@@ -476,7 +477,7 @@
             <objects>
                 <viewController id="JLM-9h-ssp" customClass="InstructionsViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ru-BL-aJ4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSq-2U-liv">
@@ -789,7 +790,7 @@ keep peeling until there are no letters left!</string>
             <objects>
                 <viewController id="G2T-dH-dwP" customClass="NewGameViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="brp-Pv-38g">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Game" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDa-3T-s7q">
@@ -844,6 +845,7 @@ keep peeling until there are no letters left!</string>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="onStartGamePress:" destination="G2T-dH-dwP" eventType="touchUpInside" id="z5m-80-VbR"/>
+                                    <segue destination="OJ3-dr-YJO" kind="presentation" identifier="gameSegueIdentifier" modalPresentationStyle="fullScreen" id="XMr-Wh-fXY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1O-IY-shl">
@@ -871,6 +873,7 @@ keep peeling until there are no letters left!</string>
                         <viewLayoutGuide key="safeArea" id="cfA-V4-fZS"/>
                         <color key="backgroundColor" red="0.99755531549999998" green="0.99730165719999997" blue="0.70008185079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Klw-Pv-qCX"/>
                     <connections>
                         <outlet property="dropDownButton" destination="K1O-IY-shl" id="Tnf-dK-rYB"/>
                         <outlet property="segControl" destination="D2c-QY-p7S" id="NL7-Il-YI2"/>
@@ -965,6 +968,8 @@ keep peeling until there are no letters left!</string>
         <segue reference="Suv-Mi-BUm"/>
         <segue reference="sXn-g0-E8l"/>
         <segue reference="COG-wT-k3U"/>
+        <segue reference="jtd-3Q-WCz"/>
+        <segue reference="oWq-cm-3eB"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="BananaGrams_logo" width="286" height="110"/>

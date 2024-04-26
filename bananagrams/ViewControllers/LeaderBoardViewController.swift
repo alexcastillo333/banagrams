@@ -8,14 +8,18 @@
 import UIKit
 import Firebase
 import CoreData
+import FirebaseStorage
 
 
 struct TimeEntry {
-        var username: String
-        var time: Int32
+    var username: String
+    var time: Int
+    var avatar: String
 }
 
 class CustomTableViewCell: UITableViewCell {
+    let ref = Database.database().reference().child("bananagrams")
+    let storageRef = Storage.storage().reference()
     let placeImageView = UIImageView()
     @IBOutlet weak var avatarImageView: UIImageView!
     
@@ -47,8 +51,40 @@ class CustomTableViewCell: UITableViewCell {
         } else {
             placeImageView.image = UIImage(named: "medal4th-10th")
         }
+        loadAvatarImage(avatar: entry.avatar)
         
     }
+    
+    func loadAvatarImage(avatar: String) {
+        guard let url = URL(string: avatar) else {
+            // Handle the case where the URL is not valid
+            print("Invalid URL for avatar")
+            self.avatarImageView.image = UIImage(named: "defaultAvatar")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    // Handle the error case
+                    print("Failed to load the avatar image, setting to default")
+                    self.avatarImageView.image = UIImage(named: "defaultAvatar")
+                }
+                return
+            }
+            
+            DispatchQueue.main.async {
+                // Set the downloaded image to the avatarImageView
+                if let image = UIImage(data: data) {
+                    self.avatarImageView.image = image
+                } else {
+                    print("Downloaded data is not an image")
+                    self.avatarImageView.image = UIImage(named: "defaultAvatar")
+                }
+            }
+        }.resume()
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         let imageViewSize = avatarImageView.frame.size
@@ -90,9 +126,6 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
         self.getStatistics()
     }
     
-    @IBAction func updateStats(_ sender: Any) {
-        self.getStatistics()
-    }
     
     func getStatistics() {
         ref.observeSingleEvent(of: .value) { snapshot in
@@ -102,13 +135,14 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
                 guard let childSnapshot = child as? DataSnapshot,
                       let userData = childSnapshot.value as? [String: Any],
                       let username = userData["username"] as? String,
-                      let bestTimes = userData["bestTimes"] as? [Int32] else {
+                      let bestTimes = userData["bestTimes"] as? [Int],
+                      let avatar = userData["avatar"] as? String else {
                     continue
                 }
                 
                 // Add all times for the user to the allTimes array
-                for time in bestTimes where time != Int32.max {
-                    allTimes.append(TimeEntry(username: username, time: time))
+                for time in bestTimes where time != Int.max {
+                    allTimes.append(TimeEntry(username: username, time: time, avatar: avatar))
                 }
             }
 
@@ -144,23 +178,9 @@ class LeaderBoardViewController: UIViewController, UITableViewDelegate, UITableV
         
         cell.configure(with: timeEntry, index: indexPath.row)
         cell.layoutIfNeeded()
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "username == %@", timeEntry.username)
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let user = results.first, let avatarData = user.avatar {
-                cell.avatarImageView.image = UIImage(data: avatarData)
-            } else {
-                print("default avatar here")
-                cell.avatarImageView.image = UIImage(named: "defaultAvatar") // A default avatar if the user doesn't have one
-            }
-        } catch {
-            print("ERROR ACCESSING AVATAR")
-            cell.avatarImageView.image = UIImage(named: "defaultAvatar")
-        }
-        
         return cell
     }
+    
     
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

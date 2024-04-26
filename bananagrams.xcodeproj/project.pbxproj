@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AA771D82BDB7A6000C3445D /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA771D72BDB7A6000C3445D /* NewGameViewController.swift */; };
 		2B39B48E2BA8CC36009550A9 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */; };
 		2B4AA92E2BDB6C3A00B68986 /* LobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AA92D2BDB6C3A00B68986 /* LobbyCell.swift */; };
 		2B4AA9302BDB753100B68986 /* Lobby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4AA92F2BDB753100B68986 /* Lobby.swift */; };
@@ -104,6 +105,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1AA771D72BDB7A6000C3445D /* NewGameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewGameViewController.swift; path = bananagrams/ViewControllers/NewGameViewController.swift; sourceTree = SOURCE_ROOT; };
 		2B39B48D2BA8CC36009550A9 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		2B4AA92D2BDB6C3A00B68986 /* LobbyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyCell.swift; sourceTree = "<group>"; };
 		2B4AA92F2BDB753100B68986 /* Lobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lobby.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 		2BCDC44C2BD8AB850098872D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1AA771D72BDB7A6000C3445D /* NewGameViewController.swift */,
 				84E2BDEF2BB563E0006D3A2B /* GameViewController.swift */,
 				B8824EAE2BA6DDDF00F534D2 /* LoginViewController.swift */,
 				B8E1AA6E2B9A63370046E257 /* ViewController.swift */,
@@ -461,6 +464,7 @@
 			files = (
 				B8824EC32BA6F14300F534D2 /* SignUpViewController.swift in Sources */,
 				B8579EBB2BBDF2EE00DFCDCC /* SoundFXButton.swift in Sources */,
+				1AA771D82BDB7A6000C3445D /* NewGameViewController.swift in Sources */,
 				B8E1AA6F2B9A63370046E257 /* ViewController.swift in Sources */,
 				B8E1AA6B2B9A63370046E257 /* AppDelegate.swift in Sources */,
 				B8E1AA6D2B9A63370046E257 /* SceneDelegate.swift in Sources */,

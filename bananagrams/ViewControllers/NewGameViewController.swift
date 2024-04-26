@@ -15,6 +15,8 @@ class NewGameViewController: UIViewController, UITableViewDataSource, UITableVie
     
     @IBOutlet weak var selectedDeckLabel: UILabel!
     
+    var username: String?
+    var email: String?
     
     let options = ["Default Deck", "My Deck 1", "Two-man Deck", "Special Deck", "Easy Deck", "No Vowels", "Only Vowels"]
     var isDropdownVisible = false
@@ -94,14 +96,13 @@ class NewGameViewController: UIViewController, UITableViewDataSource, UITableVie
     
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "gameSegueIdentifier" {
+            if let nextVC = segue.destination as? GameViewController {
+                nextVC.email = email
+                nextVC.username = username
+            }
+        }
     }
-    */
 
 }

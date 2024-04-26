@@ -40,6 +40,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // email used to load correct color theme
     var email: String?
     
+    var username: String?
+    
     let ref = Database.database().reference().child("bananagrams")
     
   
@@ -110,51 +112,31 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self.timer.text = timeString
             }
         }
-        saveTimeToCoreData()
+        updateUserTimes()
         
         
     }
     
-    func saveTimeToCoreData() {
-        
-        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "email == %@", email ?? "")
-        do {
-            let results = try context.fetch(fetchRequest)
-            if let user = results.first {
-                var times = [user.time1, user.time2, user.time3, user.time4, user.time5]
-                        
-                // Add the new time and sort the array
-                times.append(Int32(self.time))
+    func updateUserTimes() {
+        ref.child(username!).observeSingleEvent(of: .value, with: { snapshot in
+            guard let userData = snapshot.value as? [String: Any],
+                  let username = userData["username"] as? String,
+                  var times = userData["bestTimes"] as? [Int] else {
+                return
+            }
+                times.append(self.time)
                 times.sort()
-                
                 times = Array(times.prefix(5))
                 
-                user.time1 = times.count > 0 ? times[0] : Int32.max
-                user.time2 = times.count > 1 ? times[1] : Int32.max
-                user.time3 = times.count > 2 ? times[2] : Int32.max
-                user.time4 = times.count > 3 ? times[3] : Int32.max
-                user.time5 = times.count > 4 ? times[4] : Int32.max
-                print("below is usertime")
-                print(user.time1)
-                print(user.time2)
+                // set time for user
+                let user = self.ref.child(username)
                 
-                let user1 = ref.child(user.username!)
-                
-                user1.child("bestTimes").setValue(times)
-                
-                
-                try context.save()
-                
-                
-                
-            }
-        } catch {
-            print("ERROR SAVING TIME")
+                // Update Firebase with the new times
+                user.child("bestTimes").setValue(times)
+            })
+  
         }
-            
-        
-    }
+    
     
     // allow this screen to recognize motion
     override var canBecomeFirstResponder: Bool {
