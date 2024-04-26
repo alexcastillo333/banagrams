@@ -44,7 +44,7 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
                 let times = [user.time1, user.time2, user.time3, user.time4, user.time5]
                 // Filter out Int32.max values and sort the remaining times
                 topTimes = times.filter { $0 != Int32.max }.sorted()
-                tableView.reloadData()  // Assuming 'tableView' is your UITableView's outlet
+                tableView.reloadData()
             }
         } catch let error as NSError {
             print("Could not fetch times: \(error), \(error.userInfo)")
@@ -139,16 +139,6 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate &
         present(controller, animated: true)
         
     }
-//    @IBAction func signOutButtonPressed(_ sender: Any) {
-//        
-//        do {
-//            
-//            try Auth.auth().signOut()
-//            performSegue(withIdentifier: "signOutSegue", sender: self)
-//        } catch {
-//            print("ERROR LOGGING OUT")
-//        }
-//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return topTimes.count

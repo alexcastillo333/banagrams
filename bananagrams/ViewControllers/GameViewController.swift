@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import Firebase
 
 // Screen for the gameplay
 class GameViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIScrollViewDelegate {
@@ -38,6 +39,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // email used to load correct color theme
     var email: String?
+    
+    let ref = Database.database().reference().child("bananagrams")
     
   
     
@@ -108,6 +111,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         saveTimeToCoreData()
+        
+        
     }
     
     func saveTimeToCoreData() {
@@ -133,8 +138,14 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 print("below is usertime")
                 print(user.time1)
                 print(user.time2)
-        
+                
+                let user1 = ref.child(user.username!)
+                
+                user1.child("bestTimes").setValue(times)
+                
+                
                 try context.save()
+                
                 
                 
             }
