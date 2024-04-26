@@ -374,6 +374,19 @@
                                     <segue destination="Ykd-yd-UnO" kind="presentation" identifier="leaderboardSegueIdentifier" modalPresentationStyle="fullScreen" id="6tv-wM-jch"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3cc-P7-oy3">
+                                <rect key="frame" x="133" y="589" width="126" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Multiplayer">
+                                    <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="18"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="HNd-yr-liN" kind="presentation" identifier="multiplayerSegueIdentifier" modalPresentationStyle="fullScreen" id="C18-eT-Ka1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="OPI-E3-Ugn"/>
                         <color key="backgroundColor" red="0.99755531549999998" green="0.99730165719999997" blue="0.70008185079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -513,6 +526,45 @@ keep peeling until there are no letters left!</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a1g-6c-2d6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1904.5801526717557" y="-13.380281690140846"/>
+        </scene>
+        <!--Multiplayer View Controller-->
+        <scene sceneID="Xra-hK-FSC">
+            <objects>
+                <viewController id="HNd-yr-liN" customClass="MultiplayerViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T8g-SN-SJ7">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="oNR-N5-r7X">
+                                <rect key="frame" x="0.0" y="139" width="393" height="713"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6W-OZ-io9">
+                                <rect key="frame" x="33" y="67" width="75" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Back">
+                                    <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="zyc-48-JGg" kind="presentation" identifier="multiplayerToHomeSegueIdentifier" modalPresentationStyle="fullScreen" id="sXn-g0-E8l"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="nEr-fV-DvG"/>
+                        <color key="backgroundColor" red="0.99755531549999998" green="0.99730165719999997" blue="0.70008185079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="7tC-vZ-0TC"/>
+                    <connections>
+                        <outlet property="tableView" destination="oNR-N5-r7X" id="msa-gD-3w2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ifi-D5-x5t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2820.6106870229005" y="-13.380281690140846"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="UxE-gE-6AC">
@@ -806,8 +858,8 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="7qw-nV-3Va"/>
-        <segue reference="oWq-cm-3eB"/>
+        <segue reference="sXn-g0-E8l"/>
+        <segue reference="COG-wT-k3U"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="BananaGrams_logo" width="286" height="110"/>

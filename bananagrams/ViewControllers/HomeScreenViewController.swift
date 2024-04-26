@@ -87,6 +87,13 @@ class HomeScreenViewController: UIViewController {
                 nextVC.email = email
             }
         }
+        if segue.identifier == "multiplayerSegueIdentifier" {
+            if let nextVC = segue.destination as?
+                MultiplayerViewController {
+                nextVC.email = email
+                nextVC.username = username
+            }
+        }
     }
      
     
