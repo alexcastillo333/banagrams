@@ -622,7 +622,7 @@ keep peeling until there are no letters left!</string>
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="makeLobby:" destination="HNd-yr-liN" eventType="touchUpInside" id="RRv-TV-oHz"/>
+                                    <action selector="readyPlayer:" destination="3eY-QT-WUl" eventType="touchUpInside" id="N74-ZR-bMr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8OA-Ja-fXP">

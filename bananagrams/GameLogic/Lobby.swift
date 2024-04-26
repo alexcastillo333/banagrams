@@ -29,10 +29,11 @@ class Lobby {
         return ref.child(lobbyName)
     }
     
-    func addPlayer(identifier: String, name: String, deck: [Character]) {
+    func addPlayer(identifier: String, name: String, deck: [Character], isReady: Bool) {
         let playerValues: [String: Any] = [
             "name": name,
-            "deck": deck
+            "deck": deck,
+            "isReady": isReady
         ]
         let player = self.ref.child(self.lobbyName).child(identifier)
         player.updateChildValues(playerValues) { (error, _) in
@@ -48,9 +49,37 @@ class Lobby {
         self.ref.child(self.lobbyName).child(identifier).removeValue()
     }
     
+    func setReady(identifier: String, ready: Bool) {
+        self.ref.child(self.lobbyName).child(identifier).child("isReady").setValue(ready)
+    }
+            
+    func isReady(identifier: String, completion: @escaping (Bool) -> Void) {
+        let playerRef = self.ref.child(self.lobbyName).child(identifier)
+        
+        // Extract the value of "isReady" from the snapshot
+        playerRef.observeSingleEvent(of: .value) { (snapshot) in
+            guard snapshot.exists() else {
+                print("\(identifier) isReady node does not exist")
+                return
+            }
+            
+            if let playerData = snapshot.value as? [String: Any],
+               let readyBool = playerData["isReady"] as? Bool {
+                
+                completion(readyBool)
+            } else {
+                print("Error in retrieving isReady bool for \(identifier)")
+                completion(false)
+            }
+        }
+        
+        completion(false)
+    }
+
+    
     // use this logic to get deck instead
     func getPlayerName(identifier: String, completion: @escaping (String) -> Void) {
-        var name: String = "Player not found."
+        let name: String = "Player not found."
         let player = ref.child(self.lobbyName).child(identifier)
         // Observe changes at the player1 node
         player.observeSingleEvent(of: .value) { (snapshot) in

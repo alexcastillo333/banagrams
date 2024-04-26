@@ -79,7 +79,7 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
         Lobby.createLobby(identifier: lobbyName)
         let lobby = Lobby(lobbyName: lobbyName)
         
-        lobby.addPlayer(identifier: self.username ?? "none" , name: self.username ?? "none", deck: [])
+        lobby.addPlayer(identifier: self.username ?? "none" , name: self.username ?? "none", deck: [], isReady: false)
         
         selectedLobby = lobby
         
@@ -105,7 +105,7 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let lobby = lobbyList[indexPath.row]
-        lobby.addPlayer(identifier: self.username ?? "none" , name: self.username ?? "none", deck: [])
+        lobby.addPlayer(identifier: self.username ?? "none" , name: self.username ?? "none", deck: [], isReady: false)
         
         selectedLobby = lobby
         performSegue(withIdentifier: "multiplayerToLobbySegueIdentifier", sender: indexPath)

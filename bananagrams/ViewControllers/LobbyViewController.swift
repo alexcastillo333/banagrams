@@ -11,6 +11,7 @@ import Firebase
 class LobbyViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var email: String?
     var username: String?
+    var isReady: Bool = false
     var lobby: Lobby?
     var timer: Timer?
     var playerList: [String] = []
@@ -63,19 +64,13 @@ class LobbyViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             self.tableView.reloadData()
         }
-//        lobby?.getPlayerName(identifier: "player1") { playerName in
-//            if playerName == "Player not found."
-//            if !self.playerList.contains(playerName) {
-//                self.playerList.append(playerName)
-//            }
-//        }
-//        lobby?.getPlayerName(identifier: "player2") { playerName in
-//            if !self.playerList.contains(playerName) {
-//                self.playerList.append(playerName)
-//            }
-//        }
-//        self.tableView.reloadData()
     }
+    
+    @IBAction func readyPlayer(_ sender: Any) {
+        self.isReady = !self.isReady
+        lobby?.setReady(identifier: self.username!, ready: self.isReady)
+    }
+    
     
     @IBAction func leaveLobby(_ sender: Any) {
         self.lobby?.removePlayer(identifier: self.username!)
@@ -89,6 +84,16 @@ class LobbyViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
         
+        
+        lobby?.isReady(identifier: playerList[indexPath.row]) { isReady in
+            DispatchQueue.main.async {
+                if isReady {
+                    cell.backgroundColor = UIColor.green
+                } else {
+                    cell.backgroundColor = UIColor.red
+                }
+            }
+        }
         cell.textLabel?.text = playerList[indexPath.row]
         
         return cell
