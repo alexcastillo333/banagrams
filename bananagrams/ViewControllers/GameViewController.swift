@@ -356,12 +356,16 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.scrollView.frame = self.view.frame
             self.gameEndPopup()
             let closeButton = UIButton(type: .custom)
-            let closeOrigin = CGPoint(x:self.view.frame.width - 100, y: 60)
-            
-            closeButton.frame = CGRect(x: self.view.frame.width - 40, y: 0, width: 40, height: 40)
+            let closeOrigin = CGPoint(x:self.view.frame.width - 50, y: 60)
+            closeButton.frame = CGRect(origin: closeOrigin, size: CGSize(width: 30, height: 30))
             closeButton.setTitle("✕", for: .normal)
-            closeButton.setTitleColor(UIColor.black, for: .normal)
+            closeButton.setTitleColor(UIColor.red, for: .normal)
             closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+            closeButton.backgroundColor = UIColor.white
+            closeButton.clipsToBounds = true
+            closeButton.layer.cornerRadius = 5
+            closeButton.layer.borderWidth = 2
+            closeButton.layer.borderColor = UIColor.black.cgColor
             self.view.addSubview(closeButton)
         } else {
             self.info.textColor = UIColor.clear
@@ -552,8 +556,11 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     @objc func closeButtonTapped() {
-        print("fart poop yeah")
         // Handle the close button tap action here
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        <#code#>
     }
     
 }
