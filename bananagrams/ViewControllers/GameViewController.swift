@@ -19,7 +19,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var gameHand: UICollectionView!
     
     
-    
+    @IBOutlet weak var closeButton: UIButton!
+    let segueID = "GameToHome"
     // count the time until the game ends
     var timer:UILabel!
     // size of the bunch displayed in the top left
@@ -48,6 +49,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // email used to load correct color theme
     var email: String?
+    var username: String?
     
     let ref = Database.database().reference().child("bananagrams")
     
@@ -56,6 +58,16 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // set up the screen, (scrollview is needed for horizontal scrolling of the gameBoard)
     override func viewDidLoad() {
         super.viewDidLoad()
+        let closeOrigin = CGPoint(x:self.view.frame.width - 50, y: 60)
+        closeButton.frame = CGRect(origin: closeOrigin, size: CGSize(width: 30, height: 30))
+        closeButton.setTitle("✕", for: .normal)
+        closeButton.setTitleColor(UIColor.red, for: .normal)
+        closeButton.backgroundColor = UIColor.white
+        closeButton.clipsToBounds = true
+        closeButton.layer.cornerRadius = 5
+        closeButton.layer.borderWidth = 2
+        closeButton.layer.borderColor = UIColor.black.cgColor
+        closeButton.isHidden = true
         var array = Array(repeating: 0, count: 26)
         //array[0] = 2
         array[0] = 3
@@ -355,18 +367,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             self.gameHand.isHidden = true
             self.scrollView.frame = self.view.frame
             self.gameEndPopup()
-            let closeButton = UIButton(type: .custom)
-            let closeOrigin = CGPoint(x:self.view.frame.width - 50, y: 60)
-            closeButton.frame = CGRect(origin: closeOrigin, size: CGSize(width: 30, height: 30))
-            closeButton.setTitle("✕", for: .normal)
-            closeButton.setTitleColor(UIColor.red, for: .normal)
-            closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-            closeButton.backgroundColor = UIColor.white
-            closeButton.clipsToBounds = true
-            closeButton.layer.cornerRadius = 5
-            closeButton.layer.borderWidth = 2
-            closeButton.layer.borderColor = UIColor.black.cgColor
+            self.closeButton.isHidden = false
             self.view.addSubview(closeButton)
+            self.view.bringSubviewToFront(closeButton)
+            
         } else {
             self.info.textColor = UIColor.clear
             self.info.text = "you peeled and drew " + outcome
@@ -554,13 +558,15 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.view.addSubview(popup)
         self.view.bringSubviewToFront(popup)
     }
-    
-    @objc func closeButtonTapped() {
-        // Handle the close button tap action here
-    }
-    
+     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        <#code#>
+        if segue.identifier == segueID, 
+        let nextVC = segue.destination as? HomeScreenViewController
+        {
+            nextVC.email = email
+            nextVC.username = self.username ?? "none"
+        }
     }
+    
     
 }
