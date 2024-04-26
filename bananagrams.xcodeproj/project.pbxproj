@@ -14,6 +14,7 @@
 		2B96B7882BDB31F100AB1C1E /* MultiplayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B7872BDB31F100AB1C1E /* MultiplayerViewController.swift */; };
 		2B96B78A2BDB31FC00AB1C1E /* LobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B96B7892BDB31FC00AB1C1E /* LobbyViewController.swift */; };
 		2B96B78B2BDB46E700AB1C1E /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8529AF32BD8B17E00A94EF4 /* LeaderBoardViewController.swift */; };
+		844A4C062BDBB0F200CC7EA2 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844A4C052BDBB0F200CC7EA2 /* PopUp.swift */; };
 		84535D002BC5D9BF00D9D0C6 /* scrabble_words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */; };
 		84535D022BC5DA1800D9D0C6 /* ValidWords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84535D012BC5DA1800D9D0C6 /* ValidWords.swift */; };
 		84535D042BC5E83B00D9D0C6 /* HandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84535D032BC5E83B00D9D0C6 /* HandCell.swift */; };
@@ -26,6 +27,7 @@
 		B828D8B02BD96CB900A705CA /* medal4th-10th.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B828D8AF2BD96CB900A705CA /* medal4th-10th.jpg */; };
 		B828D8B22BD96CC000A705CA /* secondplace.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B828D8B12BD96CC000A705CA /* secondplace.jpg */; };
 		B828D8B42BD96CC800A705CA /* thirdplace.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B828D8B32BD96CC800A705CA /* thirdplace.jpg */; };
+		B8529AF42BD8B17E00A94EF4 /* LeaderBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8529AF32BD8B17E00A94EF4 /* LeaderBoardViewController.swift */; };
 		B8579EB32BBDDFDC00DFCDCC /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8579EB22BBDDFDC00DFCDCC /* SettingsViewController.swift */; };
 		B8579EB52BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8579EB42BBDE9CA00DFCDCC /* SOUNDEFFECT2MAN.mp3 */; };
 		B8579EB72BBDEF1200DFCDCC /* croppedLofi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = B8579EB62BBDEF1200DFCDCC /* croppedLofi.mp3 */; };
@@ -111,6 +113,7 @@
 		2B4AA92F2BDB753100B68986 /* Lobby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lobby.swift; sourceTree = "<group>"; };
 		2B96B7872BDB31F100AB1C1E /* MultiplayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiplayerViewController.swift; sourceTree = "<group>"; };
 		2B96B7892BDB31FC00AB1C1E /* LobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyViewController.swift; sourceTree = "<group>"; };
+		844A4C052BDBB0F200CC7EA2 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		84535CFF2BC5D9BF00D9D0C6 /* scrabble_words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scrabble_words.txt; sourceTree = "<group>"; };
 		84535D012BC5DA1800D9D0C6 /* ValidWords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidWords.swift; sourceTree = "<group>"; };
 		84535D032BC5E83B00D9D0C6 /* HandCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandCell.swift; sourceTree = "<group>"; };
@@ -265,6 +268,7 @@
 		2BCDC44E2BD8AB940098872D /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				844A4C052BDBB0F200CC7EA2 /* PopUp.swift */,
 				84E2BDF12BB56426006D3A2B /* Tile.swift */,
 				B8579EBA2BBDF2EE00DFCDCC /* SoundFXButton.swift */,
 				84535D032BC5E83B00D9D0C6 /* HandCell.swift */,
@@ -466,6 +470,7 @@
 				B8579EBB2BBDF2EE00DFCDCC /* SoundFXButton.swift in Sources */,
 				1AA771D82BDB7A6000C3445D /* NewGameViewController.swift in Sources */,
 				B8E1AA6F2B9A63370046E257 /* ViewController.swift in Sources */,
+				844A4C062BDBB0F200CC7EA2 /* PopUp.swift in Sources */,
 				B8E1AA6B2B9A63370046E257 /* AppDelegate.swift in Sources */,
 				B8E1AA6D2B9A63370046E257 /* SceneDelegate.swift in Sources */,
 				84E2BDF02BB563E0006D3A2B /* GameViewController.swift in Sources */,

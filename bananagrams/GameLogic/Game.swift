@@ -22,7 +22,7 @@ class Game {
     // a tuple of the row and col values of the last placed index on the grid, used to check if all tiles are continous or not
     var lastPlacedIndex: (Int, Int)
     
-    
+    var words:Set<String>
     // the number of rows (and columns) of this games grid
     var numRows:Int
     // The grid for the game, where the player places their tiles to make words
@@ -30,7 +30,6 @@ class Game {
     var grid: [[Tile?]]
     // This tracks the nuber of tiles that are currently placed on the grid
     var tilesOnGrid:Int
-    
     
     
     
@@ -51,7 +50,6 @@ class Game {
         // initialize deck: for each letter in the alphabet, add the letter to the deck the number of times specified in deckSpec
         for letter in 0...25 {
             //for _ in 1...deckSpec[letter] {
-            print(deckSpec[letter])
             if deckSpec[letter] > 0 {
                 for _ in 1...deckSpec[letter] {
                     bunch.append(Character(UnicodeScalar(65 + letter)!))
@@ -60,9 +58,16 @@ class Game {
         }
         
         // initialize hand by randomly removing 21 indices(letters) from deck, update bunch and hand accordingly
-        
+        var startHandSize:Int
+        if bunch.count > 21 {
+            startHandSize = 21
+        } else if bunch.count > 2 {
+            startHandSize = bunch.count - 3
+        } else {
+            startHandSize = bunch.count
+        }
         // TODO: change this back to 21 when testing is finished
-        for _ in 1...2 {
+        for _ in 1...startHandSize {
             // randomly remove letter from
             let randomIndex = Int.random(in: 0..<bunch.count)
             let letter = bunch.remove(at: randomIndex)
@@ -83,6 +88,7 @@ class Game {
         // grid is initially empty
         grid = Array(repeating: Array(repeating: nil, count: numRows), count: numRows)
         lastPlacedIndex = (-1, -1)
+        words = Set()
     }
     
     
@@ -118,12 +124,12 @@ class Game {
     // if a player peels, see if they have a valid tile layout, if they do, draw a random letter from the bunch and place it in their hand
     // or set gameOver to true if no letters left to peel
     // if not, return false.
-    func peel() -> Bool {
+    func peel() -> String {
         if checkPeelConditions() {
             if  bunch.isEmpty {
                 gameOver = true
                 print("you win")
-                return true
+                return "win"
             }
             let randomIndex = Int.random(in: 0..<bunch.count)
             let letter = bunch.remove(at: randomIndex)
@@ -132,9 +138,9 @@ class Game {
             } else {
                 hand[letter]! += 1
             }
-            return true
+            return String(letter)
         }
-        return false
+        return "fail"
     }
     
     
@@ -281,7 +287,12 @@ class Game {
     
     // check if a word is in the playable words set
     func checkWord(word:String) -> Bool {
-        return Game.playableWords.contains(word)
+        
+        if Game.playableWords.contains(word) {
+            words.insert(word)
+            return true
+        }
+        return false
     }
     
 }

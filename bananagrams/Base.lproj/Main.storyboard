@@ -761,11 +761,10 @@ keep peeling until there are no letters left!</string>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvg-yC-a6x">
-                                <rect key="frame" x="269" y="652" width="108" height="166"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xvg-yC-a6x">
+                                <rect key="frame" x="169" y="718" width="57" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Peel"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Peel"/>
                                 <connections>
                                     <action selector="peelButtonPressed:" destination="OJ3-dr-YJO" eventType="touchUpInside" id="LJD-KU-kYb"/>
                                 </connections>
@@ -783,7 +782,7 @@ keep peeling until there are no letters left!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5yz-C1-VCc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2442" y="723"/>
+            <point key="canvasLocation" x="2441.9847328244273" y="722.53521126760563"/>
         </scene>
         <!--New Game View Controller-->
         <scene sceneID="ipK-A3-i7e">
@@ -965,8 +964,6 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jtd-3Q-WCz"/>
-        <segue reference="oWq-cm-3eB"/>
         <segue reference="Suv-Mi-BUm"/>
         <segue reference="sXn-g0-E8l"/>
         <segue reference="COG-wT-k3U"/>
