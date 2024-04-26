@@ -1,0 +1,4 @@
+module GoogleUtilitiesPrivacy {
+header "GoogleUtilitiesPrivacy-Swift.h"
+export *
+}

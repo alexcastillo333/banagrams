@@ -1,0 +1,4 @@
+module GoogleUtilities_ISASwizzler {
+umbrella "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/GoogleUtilities/GoogleUtilities/ISASwizzler/Public"
+export *
+}

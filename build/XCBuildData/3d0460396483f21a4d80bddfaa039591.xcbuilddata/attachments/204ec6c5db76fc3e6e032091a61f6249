@@ -1,0 +1,18 @@
+{
+  "" : {
+    "diagnostics" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift-master.dia",
+    "emit-module-dependencies" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift-master-emit-module.dia",
+    "swift-dependencies" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift-master.swiftdeps"
+  },
+  "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/FirebaseAnalyticsSwift/Sources/FirebaseAnalyticsSwift.swift" : {
+    "const-values" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.swiftconstvalues",
+    "dependencies" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.d",
+    "diagnostics" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.dia",
+    "index-unit-output-path" : "/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.o",
+    "llvm-bc" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.bc",
+    "object" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.o",
+    "swift-dependencies" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift.swiftdeps",
+    "swiftmodule" : "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/firebase-ios-sdk/build/Firebase.build/Debug-iphonesimulator/FirebaseAnalyticsSwift.build/Objects-normal/x86_64/FirebaseAnalyticsSwift~partial.swiftmodule"
+  }
+}

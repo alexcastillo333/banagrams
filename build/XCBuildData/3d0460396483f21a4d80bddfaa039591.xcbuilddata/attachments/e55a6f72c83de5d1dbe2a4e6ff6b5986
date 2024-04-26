@@ -1,0 +1,4 @@
+module GoogleAppMeasurementOnDeviceConversionTarget {
+umbrella "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/GoogleAppMeasurement/GoogleAppMeasurementOnDeviceConversionWrapper/include"
+export *
+}
