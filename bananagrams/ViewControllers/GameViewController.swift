@@ -22,10 +22,19 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     // count the time until the game ends
     var timer:UILabel!
+    // size of the bunch displayed in the top left
+    var bunchSize: UILabel!
+    // info about what tiles you draw when peeling and dumping
+    var info: UILabel!
     // numner of seconds that have passed
+    var scrollView:UIScrollView!
     var time = 0
     // queue for updating timer
     var queue: DispatchQueue!
+    // information about the game
+    var peelFails = 0
+    var totalPeels = 0
+    var dumps = 0
     // this contains the data sources for the gameBoard and methods for manipulating them
     var game:Game!
     // the width and height of the gameBoard cells on the screen
@@ -48,7 +57,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
         var array = Array(repeating: 0, count: 26)
-        array[0] = 2
+        //array[0] = 2
+        array[0] = 3
+        array[1] = 1
+        array[13] = 2
         game = Game(deckSpec: array)
         // game = game()
         let handHeight = self.view.frame.height / 5
@@ -60,13 +72,16 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let handFrame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.height - handHeight, width: self.view.frame.width, height: handHeight)
         gameHand.frame = handFrame
         let scrollFrame = CGRect(x: self.view.frame.origin.x, y: self.view.frame.origin.y,width: self.view.frame.width, height: self.view.frame.height - handHeight)
-        let scrollView = UIScrollView(frame: scrollFrame)
+        scrollView = UIScrollView(frame: scrollFrame)
         scrollView.addSubview(gameBoard)
         self.view.addSubview(scrollView)
         scrollView.delegate = self
         scrollView.contentSize = gameBoard.frame.size
         scrollView.minimumZoomScale = 0.66
         scrollView.maximumZoomScale = 1.0
+        scrollView.backgroundColor = UIColor.black
+        let offset = (self.game.numRows / 2 - 1) * gridCellWidth
+        scrollView.contentOffset = CGPoint(x: offset, y: offset)
         gameBoard.delegate = self
         gameBoard.dataSource = self
         gameBoard.delaysContentTouches = true
@@ -84,8 +99,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         // make the timer
         let timerSize = CGSize(width: 90.0, height: 40.0)
-        let timerOrigin = CGPoint(x: (self.view.frame.width - 90) / 2, y: 60)
+        let timerOrigin = CGPoint(x:self.view.frame.width - 100, y: 60)
         timer = UILabel(frame: CGRect(origin: timerOrigin, size: timerSize))
+        timer.clipsToBounds = true
+        timer.alpha = 0.5
         timer.backgroundColor = UIColor.black
         timer.layer.cornerRadius = 10
         timer.textColor = UIColor.white
@@ -93,6 +110,28 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.view.addSubview(timer)
         self.view.bringSubviewToFront(timer)
         queue = DispatchQueue(label: "myQueue", qos: .userInitiated)
+        // make bunchSize tracker
+        let bunchOrigin = CGPoint(x: 10, y: 60)
+        bunchSize = UILabel(frame: CGRect(origin: bunchOrigin, size: timerSize))
+        bunchSize.clipsToBounds = true
+        bunchSize.alpha = 0.5
+        bunchSize.backgroundColor = UIColor.black
+        bunchSize.layer.cornerRadius = 10
+        bunchSize.textColor = UIColor.white
+        bunchSize.textAlignment = .center
+        bunchSize.text = String(self.game.bunch.count)
+        self.view.addSubview(bunchSize)
+        self.view.bringSubviewToFront(bunchSize)
+        // make info bar
+        let infoSize = CGSize(width: self.view.frame.width, height: 20.0)
+        let infoOrigin = CGPoint(x: 0.0, y: self.view.frame.height - handHeight - 10)
+        info = UILabel(frame: CGRect(origin: infoOrigin, size: infoSize))
+        info.clipsToBounds = true
+        info.backgroundColor = UIColor.black
+        info.textColor = UIColor.clear
+        info.textAlignment = .center
+        self.view.addSubview(info)
+        self.view.bringSubviewToFront(view)
         // for detecting shaking
         becomeFirstResponder()
     }
@@ -100,7 +139,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func timerStart() {
         while !game.gameOver {
-            
             usleep(1000000)
             self.time += 1
             DispatchQueue.main.async {
@@ -111,8 +149,6 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         saveTimeToCoreData()
-        
-        
     }
     
     func saveTimeToCoreData() {
@@ -140,14 +176,8 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 print(user.time2)
                 
                 let user1 = ref.child(user.username!)
-                
                 user1.child("bestTimes").setValue(times)
-                
-                
                 try context.save()
-                
-                
-                
             }
         } catch {
             print("ERROR SAVING TIME")
@@ -166,25 +196,25 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
         if motion == .motionShake {
             // can only dump when at least 3 tiles are in the bunch
-            if self.game.bunch.count > 3 {
+            if self.game.bunch.count >= 3 {
                 if !self.gameHand.indexPathsForSelectedItems!.isEmpty {
+                    self.dumps += 1
                     let idx = self.gameHand.indexPathsForSelectedItems![0]
                     let lettersInHand = Array(game.hand.keys).sorted()
                     let letterToDump = lettersInHand[idx.item]
-                    UIView.animate(withDuration: 1.0,
-                                   animations: { let dumpee = self.gameHand.cellForItem(at: idx) as! HandCell
-                        
-                        dumpee.center.y += self.gameHand.frame.height
-                        dumpee.transform = dumpee.transform.rotated(by: CGFloat(Double.pi) * 3)
-                                                },
-                                   completion: {_ in
-                        let newTiles = self.game.dump(letter: letterToDump)
-                        self.gameBoard.reloadData()
-                        self.gameHand.reloadData()
-                        self.peelButton.isHidden = !self.game.hand.isEmpty
-                    }
-                    )
+                    let newTiles = self.game.dump(letter: letterToDump)
+                    self.info.textColor = UIColor.clear
+                    self.info.text = "you dumped " + String(letterToDump) + " and drew \(newTiles[0]), \(newTiles[1]), \(newTiles[2])"
+                    UIView.transition(with: self.info, duration: 1.0, options: .transitionCrossDissolve, animations: {self.info.textColor = UIColor.white},
+                        completion: { _ in
+                        UIView.transition(with: self.info, duration: 4.0, options: .transitionCrossDissolve, animations: {
+                            self.info.textColor = UIColor.clear
+                        })
+                    })
+                    self.time += 3
                 }
+                bunchSize.text = String(self.game.bunch.count)
+                self.gameHand.reloadData()
             }
         }
     }
@@ -310,13 +340,42 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
    }
     
     @IBAction func peelButtonPressed(_ sender: Any) {
-        if !self.game.peel() {
+        let outcome = self.game.peel()
+        totalPeels += 1
+        if outcome == "fail" {
+            time += 1
+            peelFails += 1
             print("play peel failed sound effect")
-        }
-        if self.game.gameOver == true {
+        } else if outcome == "win" {
             print("you win")
+            self.peelButton.isHidden = true
+            self.timer.isHidden = true
+            self.bunchSize.isHidden = true
+            self.info.isHidden = true
+            self.gameHand.isHidden = true
+            self.scrollView.frame = self.view.frame
+            self.gameEndPopup()
+            let closeButton = UIButton(type: .custom)
+            let closeOrigin = CGPoint(x:self.view.frame.width - 100, y: 60)
+            
+            closeButton.frame = CGRect(x: self.view.frame.width - 40, y: 0, width: 40, height: 40)
+            closeButton.setTitle("✕", for: .normal)
+            closeButton.setTitleColor(UIColor.black, for: .normal)
+            closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+            self.view.addSubview(closeButton)
+        } else {
+            self.info.textColor = UIColor.clear
+            self.info.text = "you peeled and drew " + outcome
+            UIView.transition(with: self.info, duration: 1.0, options: .transitionCrossDissolve, animations: {self.info.textColor = UIColor.white},
+                completion: { _ in
+                UIView.transition(with: self.info, duration: 4.0, options: .transitionCrossDissolve, animations: {
+                    self.info.textColor = UIColor.clear
+                })
+            })
         }
+        
         self.peelButton.isHidden = !self.game.hand.isEmpty
+        bunchSize.text = String(self.game.bunch.count)
         self.gameHand.reloadData()
     }
     
@@ -370,10 +429,12 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         // dragging a tile in the hand
         } else if collectionView == gameHand {
-            let keys = Array(game.hand.keys).sorted()
-            let key = keys[indexPath.item]
-            let itemProvider = NSItemProvider(object: NSString(string: String(key)))
+            let cell = self.gameHand.cellForItem(at: indexPath) as! HandCell
+            let itemProvider = NSItemProvider(object: NSString(string: cell.letter.text!))
             let dragItem = UIDragItem(itemProvider: itemProvider)
+            dragItem.previewProvider = {
+                UIDragPreview(view: self.makePreviewTile(letter: cell.letter.text!))
+            }
             return [dragItem]
         }
         return []
@@ -447,6 +508,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             } else {
                 cell.letter.text = String(self.game.grid[row][col]!.letter)
                 cell.layer.cornerRadius = CGFloat(gridCellWidth / 10)
+                cell.backgroundColor = UIColor.yellow
             }
             cell.layer.borderWidth = CGFloat(gridCellWidth / 70)
             return cell
@@ -465,6 +527,33 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return gameBoard.dequeueReusableCell(withReuseIdentifier: gridCellid, for: indexPath)
     }
     
+    func makePreviewTile(letter:String) -> UILabel{
+        let preview = UILabel(frame: CGRect(origin: self.view.center, size: CGSize(width: handCellWidth, height: handCellWidth)))
+        preview.textAlignment = .center
+        preview.text = letter
+        preview.textColor = UIColor.black
+        preview.layer.borderWidth = CGFloat(handCellWidth/70)
+        preview.layer.cornerRadius = CGFloat(handCellWidth/10)
+        preview.backgroundColor = UIColor.yellow
+        return preview
+    }
     
+    func gameEndPopup() {
+        let width = 2 * self.view.frame.width / 3
+        let height = 3 * self.view.frame.height / 4
+        //let origin = CGPoint(x: width / 3, y: height / 3)
+        let origin = CGPoint(x: (self.view.frame.width - width) / 2, y: (self.view.frame.height - height) / 2)
+
+        
+        let popup = PopUp(frame: CGRect(origin: origin, size: CGSize(width: width, height: height)))
+        popup.addVars(peelCount: self.totalPeels, failedPeelCount: self.peelFails, dumpCount: self.dumps, words: Array(self.game.words), time: time)
+        self.view.addSubview(popup)
+        self.view.bringSubviewToFront(popup)
+    }
+    
+    @objc func closeButtonTapped() {
+        print("fart poop yeah")
+        // Handle the close button tap action here
+    }
     
 }
