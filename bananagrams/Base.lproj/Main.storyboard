@@ -331,7 +331,7 @@
                                     <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="JLM-9h-ssp" kind="presentation" modalPresentationStyle="fullScreen" id="mp5-eV-t6P"/>
+                                    <segue destination="JLM-9h-ssp" kind="show" id="mp5-eV-t6P"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOi-ly-ZtF">
@@ -477,7 +477,7 @@
             <objects>
                 <viewController id="JLM-9h-ssp" customClass="InstructionsViewController" customModule="bananagrams" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8Ru-BL-aJ4">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Instructions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JSq-2U-liv">
@@ -859,7 +859,7 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bXr-i1-10o"/>
+        <segue reference="jtd-3Q-WCz"/>
         <segue reference="oWq-cm-3eB"/>
     </inferredMetricsTieBreakers>
     <resources>
