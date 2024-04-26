@@ -1,4 +1,0 @@
-module GoogleAppMeasurementWithoutAdIdSupportTarget {
-umbrella "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/GoogleAppMeasurement/GoogleAppMeasurementWithoutAdIdSupportWrapper/include"
-export *
-}

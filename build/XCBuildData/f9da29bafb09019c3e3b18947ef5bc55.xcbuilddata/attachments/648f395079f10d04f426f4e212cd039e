@@ -1,4 +1,0 @@
-module PromisesTestHelpers {
-header "PromisesTestHelpers-Swift.h"
-export *
-}

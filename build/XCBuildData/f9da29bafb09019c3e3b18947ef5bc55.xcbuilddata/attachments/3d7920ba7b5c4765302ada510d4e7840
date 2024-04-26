@@ -1,4 +1,0 @@
-module GTMSessionFetcherLogView {
-umbrella "/Users/abdullah/Library/Developer/Xcode/DerivedData/bananagrams-ebjocogezpmotcfnsrakicljreru/SourcePackages/checkouts/gtm-session-fetcher/Sources/LogView/Public"
-export *
-}

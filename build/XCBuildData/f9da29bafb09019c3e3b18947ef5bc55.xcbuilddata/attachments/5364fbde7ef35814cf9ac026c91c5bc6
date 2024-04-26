@@ -1,4 +1,0 @@
-module SwiftProtobufPluginLibrary {
-header "SwiftProtobufPluginLibrary-Swift.h"
-export *
-}
