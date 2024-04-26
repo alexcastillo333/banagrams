@@ -22,19 +22,11 @@ class Lobby {
     static func createLobby(identifier: String) {
         // Init lobby with identifier and set values
         let ref = Database.database().reference().child("playing-online")
-        ref.child(identifier).setValue("what the fuck")
-//        lobbyRef.setValue([
-//            "player1": "No player found.",
-//            "player2": "No player found.",
-//            "deck": []
-//        ]) { (error, ref) in
-//            if let error = error {
-//                print("Data could not be saved: \(error.localizedDescription)")
-//            } else {
-//                print("Data saved successfully")
-//            }
-//        }
-        // Current ref is newly made lobby
+        ref.child(identifier)
+    }
+    
+    func getReference() -> DatabaseReference {
+        return ref.child(lobbyName)
     }
     
     func addPlayer(identifier: String, name: String, deck: [Character]) {
@@ -42,7 +34,7 @@ class Lobby {
             "name": name,
             "deck": deck
         ]
-        let player = ref.child(self.lobbyName).child(identifier)
+        let player = self.ref.child(self.lobbyName).child(identifier)
         player.updateChildValues(playerValues) { (error, _) in
             if let error = error {
                 print("Error updating player1 data: \(error.localizedDescription)")
@@ -52,7 +44,12 @@ class Lobby {
         }
     }
     
-    func getPlayerName(identifier: String, label: UILabel, completion: @escaping (String) -> Void) {
+    func removePlayer(identifier: String) {
+        self.ref.child(self.lobbyName).child(identifier).removeValue()
+    }
+    
+    // use this logic to get deck instead
+    func getPlayerName(identifier: String, completion: @escaping (String) -> Void) {
         var name: String = "Player not found."
         let player = ref.child(self.lobbyName).child(identifier)
         // Observe changes at the player1 node
@@ -66,10 +63,8 @@ class Lobby {
             // Extract the value of the "name" field from the snapshot
             if let playerData = snapshot.value as? [String: Any],
                let playerName = playerData["name"] as? String {
-                name = playerName
-                label.text = name
-                print("Got the player name!")
-                print("\(playerName)")
+                print("Got the player name!: \(playerName)")
+                completion(playerName)
             } else {
                 print("Error in getting \(identifier) name")
             }

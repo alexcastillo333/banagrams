@@ -53,7 +53,7 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
     
     @objc func checkLobbies() {
         // Check for all current lobbies within multiplayer
-        ref.observeSingleEvent(of: .value) { (snapshot) in
+        self.ref.observeSingleEvent(of: .value) { (snapshot) in
             guard let children = snapshot.children.allObjects as? [DataSnapshot] else {
                 print("Failed to fetch data")
                 return
@@ -66,6 +66,7 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
                 let name = child.key
                 let lobby = Lobby(lobbyName: name)
                 self.lobbyList.append(lobby)
+
             }
             
             self.tableView.reloadData()
@@ -78,9 +79,10 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
         Lobby.createLobby(identifier: lobbyName)
         let lobby = Lobby(lobbyName: lobbyName)
         
-        lobby.addPlayer(identifier: "player1", name: self.username ?? "none", deck: [])
+        lobby.addPlayer(identifier: self.username ?? "none" , name: self.username ?? "none", deck: [])
         
         selectedLobby = lobby
+        
         self.tableView.reloadData()
         performSegue(withIdentifier: "multiplayerToLobbySegueIdentifier", sender: sender)
     }
@@ -103,7 +105,7 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let lobby = lobbyList[indexPath.row]
-        lobby.addPlayer(identifier: "player2", name: self.username ?? "none", deck: [])
+        lobby.addPlayer(identifier: self.username ?? "none" , name: self.username ?? "none", deck: [])
         
         selectedLobby = lobby
         performSegue(withIdentifier: "multiplayerToLobbySegueIdentifier", sender: indexPath)
@@ -118,7 +120,6 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
         } else if segue.identifier == "multiplayerToLobbySegueIdentifier" {
             if let nextVC = segue.destination as?
                 LobbyViewController {
-                print("selected lobby is: \(selectedLobby)")
                 nextVC.lobby = selectedLobby
                 nextVC.username = self.username
                 nextVC.email = self.email
