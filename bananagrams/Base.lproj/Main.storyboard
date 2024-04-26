@@ -611,14 +611,14 @@ keep peeling until there are no letters left!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfE-Lg-wXs">
-                                <rect key="frame" x="175" y="190" width="42" height="21"/>
+                                <rect key="frame" x="175" y="190" width="182" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m2l-Fw-UHw">
-                                <rect key="frame" x="175" y="274" width="42" height="21"/>
+                                <rect key="frame" x="175" y="274" width="165" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -684,8 +684,8 @@ keep peeling until there are no letters left!</string>
                     </view>
                     <navigationItem key="navigationItem" id="fOx-fa-hHE"/>
                     <connections>
-                        <outlet property="p1Label" destination="TfE-Lg-wXs" id="yuR-ik-Pdu"/>
-                        <outlet property="p2Label" destination="m2l-Fw-UHw" id="oqW-eR-quX"/>
+                        <outlet property="p1Label" destination="TfE-Lg-wXs" id="OAO-aQ-MKZ"/>
+                        <outlet property="p2Label" destination="m2l-Fw-UHw" id="8sr-yI-NHZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zGg-Hf-ioe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -984,7 +984,6 @@ keep peeling until there are no letters left!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="hvb-9S-HgP"/>
         <segue reference="Suv-Mi-BUm"/>
         <segue reference="sXn-g0-E8l"/>
         <segue reference="COG-wT-k3U"/>

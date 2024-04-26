@@ -9,8 +9,9 @@ import UIKit
 import Firebase
 
 class LobbyViewController: UIViewController {
-    
-    var lobbyName: String?
+    var email: String?
+    var username: String?
+    var lobby: Lobby?
     var timer: Timer?
     @IBOutlet weak var p1Label: UILabel!
     @IBOutlet weak var p2Label: UILabel!
@@ -22,7 +23,9 @@ class LobbyViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.ref = self.ref.child(lobbyName ?? "LEADERBOARD USER")
+        print("lobby is: \(self.lobby)")
+        print("lobby name: \(self.lobby!.lobbyName)")
+        self.ref = self.ref.child(lobby!.lobbyName)
         self.checkPlayers()
         self.startTimer()
     }
@@ -44,32 +47,22 @@ class LobbyViewController: UIViewController {
     
     
     @objc func checkPlayers() {
-        // Check for all current lobbies within multiplayer
-        ref.observeSingleEvent(of: .value) { (snapshot) in
-            guard let children = snapshot.children.allObjects as? [DataSnapshot] else {
-                print("Failed to fetch data")
-                return
-            }
-            
-            // Iterate through each child and extract the name
-            for child in children {
-                let identifier = child.key
-                if identifier == "player1" {
-                    self.p1Label.text = child.value as? String
-                } else if identifier == "player2" {
-                    self.p2Label.text = child.value as? String
-                }
-            }
+        lobby?.getPlayerName(identifier: "player1", label: self.p1Label) { playerName in
+            print("p1: \(playerName)")
+        }
+        lobby?.getPlayerName(identifier: "player2", label: self.p2Label) { playerName in
+            print("p2: \(playerName)")
         }
     }
 
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "lobbyToMultiplayerSegueIdentifier" {
-//            if let nextVC = segue.destination as? HomeScreenViewController {
-//                
-//            }
-//        }
+        if segue.identifier == "lobbyToMultiplayerSegueIdentifier" {
+            if let nextVC = segue.destination as? MultiplayerViewController {
+                nextVC.username = self.username!
+                nextVC.email = self.email!
+            }
+        }
     }
 
 

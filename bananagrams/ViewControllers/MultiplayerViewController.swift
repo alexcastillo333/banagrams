@@ -7,14 +7,17 @@
 
 import UIKit
 import Firebase
+
+var counter = 1
+var selectedLobby: Lobby?
+
 class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let ref = Database.database().reference().child("playing-online")
     var email: String?
     var username: String?
     var timer: Timer?
-    var lobbyCount: Int = 1
-    var lobbyList: [String] = []
-    var selectedLobby: String = ""
+    var lobbyList: [Lobby] = []
+    var selectedLobby: Lobby?
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +32,7 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         checkLobbies()
+        print("in multi now, username is: \(self.username)")
         self.startTimer()
     }
     
@@ -60,7 +64,8 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
             // Iterate through each child and extract the name
             for child in children {
                 let name = child.key
-                self.lobbyList.append(name)
+                let lobby = Lobby(lobbyName: name)
+                self.lobbyList.append(lobby)
             }
             
             self.tableView.reloadData()
@@ -68,23 +73,14 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
     }
         
     @IBAction func makeLobby(_ sender: Any) {
-        let lobbyName = "Lobby " + String(self.lobbyCount)
-        self.lobbyList.append(lobbyName)
-        self.lobbyCount += 1
+        counter += 1
+        var lobbyName = "Lobby " + String(counter)
+        Lobby.createLobby(identifier: lobbyName)
+        let lobby = Lobby(lobbyName: lobbyName)
         
-        self.ref.child(lobbyName).setValue([
-            "player1": self.username ?? "No player found.",
-            "player2": "No player found.",
-            "deck": []
-        ]) { (error, ref) in
-            if let error = error {
-                print("Data could not be saved: \(error.localizedDescription)")
-            } else {
-                print("Data saved successfully")
-            }
-        }
+        lobby.addPlayer(identifier: "player1", name: self.username ?? "none", deck: [])
         
-        self.selectedLobby = lobbyName
+        selectedLobby = lobby
         self.tableView.reloadData()
         performSegue(withIdentifier: "multiplayerToLobbySegueIdentifier", sender: sender)
     }
@@ -98,25 +94,18 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LobbyCell", for: indexPath) as! LobbyCell
         
-        cell.textLabel?.text = self.lobbyList[indexPath.row]
+        let lobby = self.lobbyList[indexPath.row]
+        cell.textLabel?.text = lobby.lobbyName
         
       
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let lobbyName = lobbyList[indexPath.row]
-        let lobbyP2Ref = self.ref.child("\(lobbyName)/player2")
-//        lobbyP2Ref.setValue(self.username) { (error, _) in
-//            if let error = error {
-//                print("Error in inserting p2 name: \(error.localizedDescription)")
-//            } else {
-//                print("P2 inserted!")
-//            }
-//        }
+        let lobby = lobbyList[indexPath.row]
+        lobby.addPlayer(identifier: "player2", name: self.username ?? "none", deck: [])
         
-        self.selectedLobby = lobbyName
-        print("before segue")
+        selectedLobby = lobby
         performSegue(withIdentifier: "multiplayerToLobbySegueIdentifier", sender: indexPath)
     }
         
@@ -129,7 +118,10 @@ class MultiplayerViewController: UIViewController, UITableViewDelegate, UITableV
         } else if segue.identifier == "multiplayerToLobbySegueIdentifier" {
             if let nextVC = segue.destination as?
                 LobbyViewController {
-                nextVC.lobbyName = self.selectedLobby
+                print("selected lobby is: \(selectedLobby)")
+                nextVC.lobby = selectedLobby
+                nextVC.username = self.username
+                nextVC.email = self.email
             }
         }
         
