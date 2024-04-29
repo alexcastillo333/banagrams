@@ -214,8 +214,8 @@
                                     <action selector="signUpButtonPressed:" destination="Nu3-uT-Lnp" eventType="touchUpInside" id="B56-69-UCp"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top 5 Best Times For Default Deck" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5P-so-Woa">
-                                <rect key="frame" x="66" y="372" width="264" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Top 5 Best Times" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5P-so-Woa">
+                                <rect key="frame" x="132" y="372" width="132" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -878,6 +878,19 @@ keep peeling until there are no letters left!</string>
                                 <nil key="highlightedColor"/>
                                 <size key="shadowOffset" width="1" height="1"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sUi-xj-pKH">
+                                <rect key="frame" x="31" y="64" width="75" height="39"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" systemColor="systemBrownColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Back">
+                                    <fontDescription key="titleFontDescription" name="TrebuchetMS" family="Trebuchet MS" pointSize="17"/>
+                                    <color key="baseBackgroundColor" systemColor="systemBrownColor"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <segue destination="zyc-48-JGg" kind="presentation" identifier="newGameToHome" modalPresentationStyle="fullScreen" id="HYR-PO-ITv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cfA-V4-fZS"/>
                         <color key="backgroundColor" red="0.99755531549999998" green="0.99730165719999997" blue="0.70008185079999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -975,7 +988,7 @@ keep peeling until there are no letters left!</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Suv-Mi-BUm"/>
-        <segue reference="duO-bQ-bFo"/>
+        <segue reference="HYR-PO-ITv"/>
         <segue reference="COG-wT-k3U"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -989,7 +1002,7 @@ keep peeling until there are no letters left!</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBrownColor">
-            <color red="0.63529411759999999" green="0.51764705879999995" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -117,6 +117,12 @@ class NewGameViewController: UIViewController, UITableViewDataSource, UITableVie
                 }
             }
         }
+        if segue.identifier == "newGameToHome" {
+            if let nextVC = segue.destination as? HomeScreenViewController {
+                nextVC.username = self.username ?? "none"
+                nextVC.email = self.email ?? "none"
+            }
+        }
     }
 
 }

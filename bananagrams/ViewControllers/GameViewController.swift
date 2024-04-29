@@ -8,6 +8,8 @@
 import UIKit
 import CoreData
 import Firebase
+import AVFoundation
+
 
 // Screen for the gameplay
 class GameViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDragDelegate, UICollectionViewDropDelegate, UIScrollViewDelegate {
@@ -24,7 +26,10 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var deckSpec:[Int]?
     
-
+    var soundEffectsEnabled = false
+    
+    var audioPlayer: AVAudioPlayer?
+    
     // count the time until the game ends
     var timer:UILabel!
     // size of the bunch displayed in the top left
@@ -142,6 +147,25 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         becomeFirstResponder()
     }
     
+
+    func fetchUserSettings() {
+        guard let email = email else {
+            print("Email is nil")
+            return
+        }
+        let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", email)
+
+        do {
+            let results = try context.fetch(fetchRequest)
+            if let user = results.first {
+                soundEffectsEnabled = user.soundEffectsOn
+            }
+        } catch {
+            print("Error fetching user settings: \(error)")
+        }
+    }
+    
     
     func timerStart() {
         while !game.gameOver {
@@ -212,6 +236,7 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchUserSettings()
         applyColorScheme()
     }
     
@@ -335,9 +360,15 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         totalPeels += 1
         if outcome == "fail" {
             time += 1
+            if soundEffectsEnabled {
+                playSoundEffect(named: "fart-83471")
+            }
             peelFails += 1
             print("play peel failed sound effect")
         } else if outcome == "win" {
+            if soundEffectsEnabled {
+                playSoundEffect(named: "victory-96688")
+            }
             print("you win")
             self.peelButton.isHidden = true
             self.timer.isHidden = true
@@ -357,6 +388,9 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
             closeButton.layer.borderColor = UIColor.black.cgColor
             self.view.addSubview(closeButton)
         } else {
+            if soundEffectsEnabled {
+                playSoundEffect(named: "monkey sound effect-[AudioTrimmer.com]")
+            }
             self.info.textColor = UIColor.clear
             self.info.text = "you peeled and drew " + outcome
             UIView.transition(with: self.info, duration: 1.0, options: .transitionCrossDissolve, animations: {self.info.textColor = UIColor.white},
@@ -370,6 +404,20 @@ class GameViewController: UIViewController, UICollectionViewDelegate, UICollecti
         self.peelButton.isHidden = !self.game.hand.isEmpty
         bunchSize.text = String(self.game.bunch.count)
         self.gameHand.reloadData()
+    }
+    
+    
+    private func playSoundEffect(named fileName: String) {
+        guard let soundURL = Bundle.main.url(forResource: fileName, withExtension: "mp3") else {
+            print("Unable to locate sound effect file.")
+            return
+        }
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.play()
+        } catch {
+            print("Error playing sound: \(error.localizedDescription)")
+        }
     }
     
     // determine if you are able to drop a tile at a location
